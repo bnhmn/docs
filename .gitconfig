@@ -11,6 +11,8 @@
         prune = true
 [diff]
         colorMoved = zebra
+[color]
+        ui = auto
 [branch]
         autoSetupMerge = always
 [push]
