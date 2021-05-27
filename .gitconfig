@@ -1,19 +1,19 @@
 [user]
-	name = Firstname Lastname
-	email = firstname.lastname@outlook.de
+        name = Firstname Lastname
+        email = firstname.lastname@outlook.de
 [credential]
-	helper = store
+        helper = store
 [core]
-    autocrlf = true
+        autocrlf = true
 [pull]
-	rebase = true
+        rebase = true
 [fetch]
-	prune = true
+        prune = true
 [diff]
-	colorMoved = zebra
+        colorMoved = zebra
 [branch]
-	autoSetupMerge = always
+        autoSetupMerge = always
 [push]
-	default = current
+        default = current
 [pager]
-    branch = cat
+        branch = cat
