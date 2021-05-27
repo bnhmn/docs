@@ -1,6 +1,6 @@
 # Base gitconfig
 
-This project contains a simple .gitconfig file containing basic configuration options: 
+This project contains a simple .gitconfig file containing basic configuration options. 
 
 ## Explanation
 
