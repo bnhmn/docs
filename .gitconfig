@@ -4,7 +4,7 @@
 [credential]
         helper = store
 [core]
-        autocrlf = true
+        autocrlf = input
 [pull]
         rebase = true
 [fetch]
