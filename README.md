@@ -9,10 +9,9 @@ This project contains a simple .gitconfig file containing basic configuration op
 Saves all repository credentials in clear text to the file `~/.git-credentials`. \
 You don't need to type in the password on every push / pull anymore.
 
-`core.autocrlf = true`
+`core.autocrlf = input`
 
-Automatically converts Windows line endings `\r\n` to Unix line endings `\n` on push and vice versa on pull. \
-On Unix systems maybe better set this option to `input`. 
+Automatically converts Windows line endings `\r\n` to Unix line endings `\n` on push. \
 More information [here](https://stackoverflow.com/questions/3206843/how-line-ending-conversions-work-with-git-core-autocrlf-between-different-operat).
 
 `pull.rebase = true`
