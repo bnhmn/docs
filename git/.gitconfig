@@ -5,8 +5,6 @@
         helper = store
 [core]
         autocrlf = input
-[pull]
-        rebase = true
 [fetch]
         prune = true
 [color]
