@@ -1,0 +1,54 @@
+version: 1
+disable_existing_loggers: true
+
+formatters:
+  colored-formatter:
+    (): colorlog.ColoredFormatter
+    format: "%(asctime)s [%(log_color)s%(levelname)-8.8s%(reset)s] [%(bold)s%(name)-28.28s%(reset)s] %(message)s"
+    log_colors:
+      DEBUG: white
+      INFO: blue
+      WARNING: yellow
+      ERROR: bold_red
+      CRITICAL: bold_red
+
+filters: [ ]
+
+handlers:
+  console:
+    level: DEBUG
+    class: logging.StreamHandler
+    stream: ext://sys.stdout
+    formatter: colored-formatter
+  error-counter:
+    level: ERROR
+    class: rvgen.ErrorCounter
+
+loggers: [ ]
+
+root: # The root logger config
+  handlers:
+    - console
+    - error-counter
+  level: INFO
+
+
+# Add in requirements.txt: 
+# pyyaml
+# colorlog
+
+# # In Python:
+# def setup_logging(level="INFO"):
+#     """
+#     Setup logging.
+
+#     :param level: The logging level.
+#     """
+#     with open(resolve_path("logging.yml"), encoding="utf-8") as config_file:
+#         dict_config = yaml.safe_load(config_file)
+
+#     dict_config["root"]["level"] = level
+#     logging.config.dictConfig(dict_config)
+#     logging.captureWarnings(True)
+#
+# setup_logging()
