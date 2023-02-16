@@ -2,10 +2,6 @@
 
 This folder contains information and scripts for Mac Operating System.
 
-## Files
-
-* [env.sh](env.sh) - Shell startup script
-
 ## Useful Shortcuts
 
 ```plain
@@ -44,14 +40,21 @@ Strg+Space default:                           switch input sources
                                               (disable under: Preferences>Keyboard>Shortcuts>Input Sources)
 ```
 
+## Files
+
+* [env.sh](env.sh) - Shell startup script
+
 ## Useful Applications
 
 ### Google
 - Homebrew
 - Oh my ZSH
 - VS Code
+- IntelliJ IDEA
 - serviceman (systemd, launchd manager)
 - Karabiner-Elements (Keyboard customization): https://karabiner-elements.pqrs.org/
+- Rectangle (Snap windows to the left, right, etc.)
+- KeepingYouAwake
 
 ### Homebrew
 - openjdk@17
