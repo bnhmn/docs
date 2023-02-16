@@ -27,7 +27,7 @@ VS Code Diff:                                 Palette -> Compare 2 folders
 VS Code Search & Replace:                     Cmd-F
 
 Eclipse Show Javadoc:                         F2
-Eclipse Format Source Code (ex. Imports):	    Cmd-Shift-F
+Eclipse Format Source Code (ex. Imports):     Cmd-Shift-F
 Eclipse Organize Imports:                     Cmd-Shift-O
 Eclipse Find in Files:                        Strg-H
 Eclipse Toggle Comment:                       Cmd-7
