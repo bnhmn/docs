@@ -14,6 +14,7 @@ Refresh:                                      Cmd-R
 Mac sperren:                                  Strg-Cmd-Q
 Teams muten:                                  Cmd-Shift-M
 Bildschirmauflösung umschalten:               Strg-Alt-M
+Spotlight (App öffnen):                       Cmd-Space
 
 Finder Versteckte Dateien anzeigen:           Cmd-Shift-.
 Finder Go To Folder:                          Cmd-Shift-G
