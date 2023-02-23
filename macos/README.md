@@ -60,6 +60,7 @@ Strg+Space default:                           switch input sources
 ### Homebrew
 - openjdk@17
 - maven
+- node
 - fzf (fuzzy finder)
 - htop
 - gettext
