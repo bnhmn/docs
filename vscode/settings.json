@@ -1,0 +1,86 @@
+{
+     // General settings
+     "window.restoreWindows": "all",
+     "liveshare.connectionMode": "relay",
+     "liveshare.allowGuestDebugControl": true,
+     "security.workspace.trust.untrustedFiles": "open",
+     // Editor settings
+     "editor.tabSize": 4,
+     "editor.fontSize": 12,
+     "editor.rulers": [80, 120],
+     "editor.renderWhitespace": "trailing",
+     "editor.suggestSelection": "first",
+     "editor.formatOnSave": true,
+     "editor.defaultFormatter": "esbenp.prettier-vscode",
+     // Debug
+     "debug.onTaskErrors": "debugAnyway",
+     "debug.javascript.suggestPrettyPrinting": false,
+     // Explorer settings
+     "explorer.confirmDragAndDrop": false,
+     "explorer.confirmDelete": false,
+     "explorer.copyRelativePathSeparator": "/",
+     // Files settings
+     "files.autoSave": "onFocusChange",
+     "files.insertFinalNewline": true,
+     "files.trimFinalNewlines": true,
+     "files.trimTrailingWhitespace": true,
+     // Workbench settings
+     "workbench.colorTheme": "Default Light+",
+     "workbench.iconTheme": "material-icon-theme",
+     "workbench.startupEditor": "newUntitledFile",
+     "workbench.editor.untitled.hint": "hidden",
+     // Terminal settings
+     "terminal.integrated.fontSize": 13,
+     "terminal.integrated.profiles.osx":{
+        "zsh": {
+            "path": "zsh",
+            "args": ["-l"]
+        },
+     },
+     "terminal.integrated.defaultProfile.osx": "zsh",
+     // Git settings
+     "git.enableSmartCommit": true,
+     "git.autofetch": true,
+     "git.confirmSync": false,
+     // Typescript/Javascript settings
+     "typescript.updateImportsOnFileMove.enabled": "always",
+     "typescript.suggest.completeJSDocs": true,
+     "importSorter.importStringConfiguration.maximumNumberOfImportExpressionsPerLine.count": 80,
+     "importSorter.importStringConfiguration.maximumNumberOfImportExpressionsPerLine.type": "newLineEachExpressionAfterCountLimitExceptIfOnlyOne",
+     "importSorter.importStringConfiguration.tabType": "tab",
+     "importSorter.importStringConfiguration.trailingComma": "multiLine",
+     "importSorter.generalConfiguration.sortOnBeforeSave": true,
+     // Prettier
+     "prettier.tabWidth": 4,
+     "prettier.singleQuote": true,
+     "prettier.jsxSingleQuote": true,
+     "prettier.trailingComma": "all",
+     "prettier.useEditorConfig": true,
+     "prettier.bracketSpacing": false,
+     // Different languages
+     "[yaml]": {
+         "editor.formatOnSave": false,
+         "editor.defaultFormatter": "redhat.vscode-yaml"
+     },
+     "[json]": {
+         "editor.formatOnSave": false
+     },
+     "[jsonc]": {
+         "editor.formatOnSave": false
+     },
+     "[python]": {
+        "editor.formatOnType": true
+    },
+    "[langium-test-dsl]": {},
+    "[javascript]": {
+        "editor.defaultFormatter": "esbenp.prettier-vscode"
+    },
+     "[markdown]": {
+         "files.trimTrailingWhitespace": false,
+         "editor.formatOnSave": false,
+         "editor.defaultFormatter": "yzhang.markdown-all-in-one",
+         "editor.wordWrap": "wordWrapColumn",
+         "editor.wordWrapColumn": 80
+     }
+
+}
