@@ -13,5 +13,9 @@
         autoSetupMerge = always
 [push]
         default = current
+[pull]
+        rebase = false
 [pager]
         branch = cat
+[http]
+        postbuffer = 524288000
