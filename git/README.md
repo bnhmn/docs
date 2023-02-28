@@ -35,3 +35,8 @@ Read more [here](https://stackoverflow.com/a/41327622/6316545).
 `pager.branch = cat`
 
 Uses cat as the pager for the `git branch` command. On most git distributions this is already the default but it wasn't on my Mac.
+
+`http.postbuffer = 524288000`
+
+Fix for git hanging after pushing big binary files (e.g. Excel, PowerPoint files). Increases the HTTP Post buffer size to 500MB.
+
