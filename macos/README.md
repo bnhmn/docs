@@ -1,4 +1,4 @@
-# MacOS 
+# MacOS
 
 This folder contains information and scripts for Mac Operating System.
 
@@ -25,9 +25,9 @@ Finder Copy Path:                             Right Click File + Press Alt-Key
 Intellij Search Everywhere (Command-Palette): Shift Shift
 Intellij Rename:                              Shift-F6
 Intellij Find Usages:                         Alt-F7
-Intellij Add another Cursor at position:	    Alt-Shift-Click
-Intellij Add Cursor above or below:	          Alt Alt-UP / Alt Alt-DOWN
-Intellij Add Cursors in selection:		        Alt-Shift-G
+Intellij Add another Cursor at position:      Alt-Shift-Click
+Intellij Add Cursor above or below:           Alt Alt-UP / Alt Alt-DOWN
+Intellij Add Cursors in selection:            Alt-Shift-G
 Intellij Open Settings:                       Cmd-,
 
 VS Code Command-Palette:                      Cmd-Shift-P
@@ -62,31 +62,34 @@ Ctrl+Space default:                           switch input sources
 ## Useful Applications
 
 ### Google
-- Homebrew
-- Oh my ZSH
-- VS Code
-- IntelliJ IDEA
-- serviceman (systemd, launchd manager)
-- Karabiner-Elements (Keyboard customization): https://karabiner-elements.pqrs.org/
-- Rectangle (Snap windows to the left, right, etc.)
-- KeepingYouAwake
+
+* Homebrew
+* Oh my ZSH
+* VS Code
+* IntelliJ IDEA
+* serviceman (systemd, launchd manager)
+* Karabiner-Elements (Keyboard customization): <https://karabiner-elements.pqrs.org/>
+* Rectangle (Snap windows to the left, right, etc.)
+* KeepingYouAwake
 
 ### Homebrew
-- openjdk@17
-- maven
-- node
-- fzf (fuzzy finder)
-- htop
-- gettext
-- watch
-- colima (Docker daemon)
-- ccat (colorized cat)
-- sevenzip
-- z (warp into directory) 
-- romkatv/powerlevel10k/powerlevel10k (ZSH theme)
+
+* openjdk@17
+* maven
+* node
+* fzf (fuzzy finder)
+* htop
+* gettext
+* watch
+* colima (Docker daemon)
+* ccat (colorized cat)
+* sevenzip
+* z (warp into directory)
+* romkatv/powerlevel10k/powerlevel10k (ZSH theme)
 
 ### Scripts
-- Open Terminal here: https://github.com/jbtule/cdto#cd-to
-- Right click -> New File: https://apps.apple.com/in/app/new-file-menu-free/id1066302071?mt=12
-- display_manager.py: https://github.com/univ-of-utah-marriott-library-apple/display_manager
+
+* Open Terminal here: <https://github.com/jbtule/cdto#cd-to>
+* Right click -> New File: <https://apps.apple.com/in/app/new-file-menu-free/id1066302071?mt=12>
+* display_manager.py: <https://github.com/univ-of-utah-marriott-library-apple/display_manager>
   cp /Library/Python/2.7/site-packages/display_manager_lib.py /Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/ && pip install pyobjc
