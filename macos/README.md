@@ -5,39 +5,53 @@ This folder contains information and scripts for Mac Operating System.
 ## Useful Shortcuts
 
 ```plain
-Windows-Taste=Command ⌘
-Alt-Taste=Option ⌥
-Strg-Taste ⌃
+Windows-Key=Command ⌘
+Alt-Key=Option ⌥
+Ctrl-Key ⌃
 
 Screenshot:                                   Shift-Cmd-4
 Refresh:                                      Cmd-R
-Mac sperren:                                  Strg-Cmd-Q
-Teams muten:                                  Cmd-Shift-M
-Bildschirmauflösung umschalten:               Strg-Alt-M
-Spotlight (App öffnen):                       Cmd-Space
+Mac Lock screen:                              Ctrl-Cmd-Q
+Teams Mute:                                   Cmd-Shift-M
+Switch screen resolution (custom):            Ctrl-Alt-M
+Spotlight (search Apps):                      Cmd-Space
+Browser Open Developer Console:               F12
 
-Finder Versteckte Dateien anzeigen:           Cmd-Shift-.
+Finder Show hidden files:                     Cmd-Shift-.
 Finder Go To Folder:                          Cmd-Shift-G
-Finder Neuer Ordner:                          Cmd-Shift-N
-Finder Pfad kopieren:                         Rechtsklick auf Datei + Alt-Taste drücken
+Finder New Folder:                            Cmd-Shift-N
+Finder Copy Path:                             Right Click File + Press Alt-Key
 
-VS Code Command Palette:                      Cmd-Shift-P
-VS Code Multicursor bei Auswahl einfügen:     Alt-Shift-I
-VS Code Find in Folder:                       Alt-Shift-F
-VS Code Diff:                                 Palette -> Compare 2 folders
+Intellij Search Everywhere (Command-Palette): Shift Shift
+Intellij Rename:                              Shift-F6
+Intellij Find Usages:                         Alt-F7
+Intellij Add another Cursor at position:	    Alt-Shift-Click
+Intellij Add Cursor above or below:	          Alt Alt-UP / Alt Alt-DOWN
+Intellij Add Cursors in selection:		        Alt-Shift-G
+Intellij Open Settings:                       Cmd-,
+
+VS Code Command-Palette:                      Cmd-Shift-P
+VS Code Reformat Code:                        Alt-Shift-F
 VS Code Search & Replace:                     Cmd-F
+VS Code Find in Folder:                       Alt-Shift-F
+VS Code Compare Folders (Plugin):             Command-Palette -> Compare 2 folders
+VS Code Add Cursors in selection:             Alt-Shift-I
+VS Code Open Terminal:                        Alt-F12
+VS Code Open Terminal in Folder:              Select Folder + Cmd-Alt-F12
+VS Code Open Keymap:                          Cmd-K Cmd-S
+VS Code Execute File (Code Runner Plugin):    Ctrl-Alt-N
 
 Eclipse Show Javadoc:                         F2
 Eclipse Format Source Code (ex. Imports):     Cmd-Shift-F
 Eclipse Organize Imports:                     Cmd-Shift-O
-Eclipse Find in Files:                        Strg-H
+Eclipse Find in Files:                        Ctrl-H
 Eclipse Toggle Comment:                       Cmd-7
-Eclipse neue Instanz starten:                 open -na eclipse
-Eclipse Terminal öffnen:                      Strg-Alt-T
+Eclipse Create new instance:                  open -na eclipse
+Eclipse Open Terminal:                        Ctrl-Alt-T
 
-Unsignierte DMG Apps installieren:            xattr -d com.apple.quarantine <NAME>.pkg
-Python Pfade anzeigen:                        python -m site
-Strg+Space default:                           switch input sources 
+Install unsigned DMG/PKG App:                 xattr -d com.apple.quarantine <NAME>.pkg
+Show Python installation path:                python -m site
+Ctrl+Space default:                           switch input sources 
                                               (disable under: Preferences>Keyboard>Shortcuts>Input Sources)
 ```
 
