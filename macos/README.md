@@ -60,6 +60,7 @@ Ctrl+Space default:                           switch input sources
 ## Files
 
 * [env.sh](env.sh) - Shell startup script
+* [toggle_screen_resolution.sh](toggle_screen_resolution.sh) - Shell script assigned to a custom Keyboard Shortcut
 
 ## Useful Applications
 
