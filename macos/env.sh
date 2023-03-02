@@ -1,5 +1,8 @@
 #!/bin/zsh
 
+# Include in .zshrc and .bashrc: source ~/env.sh
+
+# Global environment variables can be set in file /etc/profile
 export JAVA_HOME="/Library/Java/JavaVirtualMachines/jdk-17.jdk/Contents/Home"
 export PATH="/opt/homebrew/bin:$PATH"
 export PATH="$JAVA_HOME/bin:$PATH"
