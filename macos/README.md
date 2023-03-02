@@ -29,6 +29,8 @@ Intellij Add another Cursor at position:      Alt-Shift-Click
 Intellij Add Cursor above or below:           Alt Alt-UP / Alt Alt-DOWN
 Intellij Add Cursors in selection:            Alt-Shift-G
 Intellij Open Settings:                       Cmd-,
+Intellij Toggle Line Comment:			            Cmd-NUMPADDIVIDE
+Intellij Toggle Block Comment:		            Cmd-Alt-NUMPADDIVIDE
 
 VS Code Command-Palette:                      Cmd-Shift-P
 VS Code Reformat Code:                        Alt-Shift-F
