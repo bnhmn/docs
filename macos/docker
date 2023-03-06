@@ -1,0 +1,9 @@
+#!/bin/bash
+
+#serviceman add -name colima ./scripts/colima.sh 
+
+if ! (colima status &>/dev/null); then
+    colima start;
+fi
+
+/opt/homebrew/bin/docker "$@"
