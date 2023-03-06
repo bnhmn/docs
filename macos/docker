@@ -1,6 +1,8 @@
 #!/bin/bash
 
-#serviceman add -name colima ./scripts/colima.sh 
+# Docker script that starts colima if not already running.
+# Colima is a Docker Container runtime that can be used instead of Docker Desktop for MacOS.
+# With Colima you don't have to use the non-free Docker Desktop client that must always be running in the background.
 
 if ! (colima status &>/dev/null); then
     colima start;
