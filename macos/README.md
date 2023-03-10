@@ -26,11 +26,14 @@ Intellij Search Everywhere (Command-Palette): Shift Shift
 Intellij Rename:                              Shift-F6
 Intellij Find Usages:                         Alt-F7
 Intellij Add another Cursor at position:      Alt-Shift-Click
-Intellij Add Cursor above or below:           Alt Alt-UP / Alt Alt-DOWN
+Intellij Add Cursor above or below:           Alt Alt-UP/DOWN
 Intellij Add Cursors in selection:            Alt-Shift-G
 Intellij Open Settings:                       Cmd-,
 Intellij Toggle Line Comment:                 Cmd-NUMPADDIVIDE
 Intellij Toggle Block Comment:                Cmd-Alt-NUMPADDIVIDE
+Intellij Debug:                               Shift-F9
+Intellij Execute File:                        Alt-Shift-F10
+Intellij Move Code Fragment:                  Alt-Shift-UP/DOWN
 
 VS Code Command-Palette:                      Cmd-Shift-P
 VS Code Reformat Code:                        Alt-Shift-F
@@ -42,6 +45,7 @@ VS Code Open Terminal:                        Alt-F12
 VS Code Open Terminal in Folder:              Select Folder + Cmd-Alt-F12
 VS Code Open Keymap:                          Cmd-K Cmd-S
 VS Code Execute File (Code Runner Plugin):    Ctrl-Alt-N
+VS Code Toggle Secondary (Right) Sidebar:     Cmd-Alt-B
 
 Eclipse Show Javadoc:                         F2
 Eclipse Format Source Code (ex. Imports):     Cmd-Shift-F
