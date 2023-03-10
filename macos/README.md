@@ -53,7 +53,8 @@ Eclipse Open Terminal:                        Ctrl-Alt-T
 
 Install unsigned DMG/PKG App:                 xattr -d com.apple.quarantine <NAME>.pkg
 Show Python installation path:                python -m site
-Change file extension association:            Right click file in Finder -> Information -> Name & Suffix -> Change App and click "Change for all"
+Change file extension association:            Right click file in Finder -> Information -> Name & Suffix 
+                                              -> Change App and click "Change for all"
 Ctrl+Space default:                           switch input sources 
                                               (disable under: Preferences>Keyboard>Shortcuts>Input Sources)
 ```
