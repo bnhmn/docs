@@ -46,6 +46,7 @@ VS Code Open Terminal in Folder:              Select Folder + Cmd-Alt-F12
 VS Code Open Keymap:                          Cmd-K Cmd-S
 VS Code Execute File (Code Runner Plugin):    Ctrl-Alt-N
 VS Code Toggle Secondary (Right) Sidebar:     Cmd-Alt-B
+VS Code Go To Symbol in Workspace:            Cmd-O
 
 Eclipse Show Javadoc:                         F2
 Eclipse Format Source Code (ex. Imports):     Cmd-Shift-F
