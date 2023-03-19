@@ -81,6 +81,7 @@ Ctrl+Space default:                           switch input sources
 * Karabiner-Elements (Keyboard customization): <https://karabiner-elements.pqrs.org/>
 * Rectangle (Snap windows to the left, right, etc.)
 * KeepingYouAwake
+* [Swift Quit](https://swiftquit.com/) (Close Mac Applications Automatically When Their Windows Close)
 
 ### Homebrew
 
