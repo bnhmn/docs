@@ -77,7 +77,7 @@ Ctrl+Space default:                           switch input sources
 * Oh my ZSH
 * VS Code
 * IntelliJ IDEA
-* serviceman (systemd, launchd manager)
+* [serviceman](https://webinstall.dev/serviceman/) (systemd, launchd manager)
 * Karabiner-Elements (Keyboard customization): <https://karabiner-elements.pqrs.org/>
 * Rectangle (Snap windows to the left, right, etc.)
 * KeepingYouAwake
