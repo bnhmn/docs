@@ -35,6 +35,10 @@ Intellij Debug:                               Shift-F9
 Intellij Execute File:                        Alt-Shift-F10
 Intellij Move Code Fragment:                  Alt-Shift-UP/DOWN
 Intellij Show Call Hierarchy:                 Ctrl-Alt-H
+IntelliJ Generate...:                         Ctrl-N
+IntelliJ Go to Class:                         Cmd-N
+IntelliJ Go to File:                          Cmd-Shift-N
+IntelliJ Go To Implementations:               Alt-Shift-B
 
 VS Code Open Folder:                          Cmd-O
 VS Code Command-Palette:                      Cmd-Shift-P / F1
@@ -46,16 +50,14 @@ VS Code Search & Replace in Folder:           Cmd-Shift-F / Cmd-Shift-R
 VS Code Replace All Findings:                 Cmd-Enter
 VS Code Debug / Step to next Breakpoint:      F5
 VS Code Git Pull (Custom):                    Alt-P
--
 VS Code Quick Fix:                            Alt-Enter
 VS Code Add Cursors in selection:             Alt-Shift-I
 VS Code Add another Cursor at position:       Alt-CLICK
 VS Code Delete current line:                  Ctrl-K
 VS Code Execute File (Code Runner Extension): Ctrl-Alt-N
 VS Code Compare Folders (Extension):          Command-Palette -> Compare 2 folders
--
 VS Code Navigate Back/Forward:                Ctrl-MINUS / Ctrl-Shift-MINUS
-VS Code Go to Symbol in Workspace (Custom):   Cmd-O
+VS Code Go to Symbol in Workspace:            Cmd-T
 VS Code Go to File:                           Cmd-P
 VS Code Cycle through opened files:           Ctrl-TAB
 VS Code Open Settings:                        Cmd-,
