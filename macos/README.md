@@ -25,7 +25,7 @@ Finder Copy Path:                             Right Click File + Press Alt-Key
 Intellij Search Everywhere (Command-Palette): Shift Shift
 Intellij Rename:                              Shift-F6
 Intellij Find Usages:                         Alt-F7
-Intellij Add another Cursor at position:      Alt-Shift-Click
+Intellij Add another Cursor at position:      Alt-Shift-CLICK
 Intellij Add Cursor above or below:           Alt Alt-UP/DOWN
 Intellij Add Cursors in selection:            Alt-Shift-G
 Intellij Open Settings:                       Cmd-,
@@ -34,19 +34,36 @@ Intellij Toggle Block Comment:                Cmd-Alt-NUMPADDIVIDE
 Intellij Debug:                               Shift-F9
 Intellij Execute File:                        Alt-Shift-F10
 Intellij Move Code Fragment:                  Alt-Shift-UP/DOWN
+Intellij Show Call Hierarchy:                 Ctrl-Alt-H
 
-VS Code Command-Palette:                      Cmd-Shift-P
-VS Code Reformat Code:                        Alt-Shift-F
-VS Code Search & Replace:                     Cmd-F
-VS Code Find in Folder:                       Alt-Shift-F
-VS Code Compare Folders (Plugin):             Command-Palette -> Compare 2 folders
+VS Code Open Folder:                          Cmd-O
+VS Code Command-Palette:                      Cmd-Shift-P / F1
+VS Code Command-Palette Help:                 <Insert ?>
+VS Code Format Document:                      Alt-Shift-F
+VS Code Organize Imports:                     Ctrl-Alt-O
+VS Code Search & Replace:                     Cmd-F / Cmd-R
+VS Code Search & Replace in Folder:           Cmd-Shift-F / Cmd-Shift-R
+VS Code Replace All Findings:                 Cmd-Enter
+VS Code Debug / Step to next Breakpoint:      F5
+VS Code Git Pull (Custom):                    Alt-P
+-
+VS Code Quick Fix:                            Alt-Enter
 VS Code Add Cursors in selection:             Alt-Shift-I
-VS Code Open Terminal:                        Alt-F12
-VS Code Open Terminal in Folder:              Select Folder + Cmd-Alt-F12
-VS Code Open Keymap:                          Cmd-K Cmd-S
-VS Code Execute File (Code Runner Plugin):    Ctrl-Alt-N
-VS Code Toggle Secondary (Right) Sidebar:     Cmd-Alt-B
-VS Code Go To Symbol in Workspace:            Cmd-O
+VS Code Add another Cursor at position:       Alt-CLICK
+VS Code Delete current line:                  Ctrl-K
+VS Code Execute File (Code Runner Extension): Ctrl-Alt-N
+VS Code Compare Folders (Extension):          Command-Palette -> Compare 2 folders
+-
+VS Code Navigate Back/Forward:                Ctrl-MINUS / Ctrl-Shift-MINUS
+VS Code Go to Symbol in Workspace (Custom):   Cmd-O
+VS Code Go to File:                           Cmd-P
+VS Code Cycle through opened files:           Ctrl-TAB
+VS Code Open Settings:                        Cmd-,
+VS Code Open Keyboard Shortcuts (Custom):     Cmd-.
+VS Code Open Terminal (in Folder):            Alt-F12 (Select Folder + Cmd-Alt-F12)
+VS Code New Terminal (Custom):                Cmd-Shift-C
+VS Code Toggle Right Sidebar:                 Cmd-Alt-B
+VS Code Toggle Bottom Bar:                    Cmd-J
 
 Eclipse Show Javadoc:                         F2
 Eclipse Format Source Code (ex. Imports):     Cmd-Shift-F
