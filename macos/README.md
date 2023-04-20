@@ -38,7 +38,7 @@ Intellij Show Call Hierarchy:                 Ctrl-Alt-H
 IntelliJ Generate...:                         Ctrl-N
 IntelliJ Go to Class:                         Cmd-N
 IntelliJ Go to File:                          Cmd-Shift-N
-IntelliJ Go To Implementations:               Alt-Shift-B
+IntelliJ Go To Implementations:               Cmd-Alt-B
 
 VS Code Open Folder:                          Cmd-O
 VS Code Command-Palette:                      Cmd-Shift-P / F1
