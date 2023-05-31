@@ -1,21 +1,25 @@
 [user]
-        name = Firstname Lastname
-        email = firstname.lastname@outlook.de
-[credential]
-        helper = store
+  name = John Doe
 [core]
-        autocrlf = input
+  autocrlf = input  # Convert Windows line endings \r\n to Unix line endings \n on commit
 [fetch]
-        prune = true
+  prune = true      # Remove outdated tags and branches on git fetch
 [color]
-        ui = auto
+  ui = auto
 [branch]
-        autoSetupMerge = always
+  autoSetupMerge = always
 [push]
-        default = current
-[pull]
-        rebase = false
+  default = current # Auto link current branch to corresponding remote branch (git push and git pull work without args)
 [pager]
-        branch = cat
+  branch = cat      # Use cat as the pager for the git branch command (on macOS the default is less)
 [http]
-        postbuffer = 524288000
+  postBuffer = 524288000    # Fix for git hanging after pushing big binary files (e.g. Excel, PowerPoint)
+[alias]
+  # Aliases try-rebase and try-pull
+  trb = !echo "TRY REBASE CURRENT ONTO $1 $2" && echo && git rebase $1 $2 || git rebase --abort && echo && echo "REBASE CANCELLED DUE TO CONFLICTS, GOING TO MERGE" && echo && git merge $1 $2
+  tp = !git fetch $1 $2 && git trb $1 $2
+
+[includeIf "gitdir:~/git/TENANT1/"]
+  path = ~/git/TENANT1/.gitconfig   # Include this .gitconfig if git repository is inside ~/git/TENANT1 folder
+[includeIf "gitdir:~/git/TENANT2/"]
+  path = ~/git/TENANT2/.gitconfig   # Include this .gitconfig if git repository is inside ~/git/TENANT2 folder
