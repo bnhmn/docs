@@ -136,6 +136,12 @@ Execute a shell in a running Container
 docker exec -it my-container bash
 ```
 
+## Copy files between Host and Container
+
+```bash
+docker cp <containerId>:/file/path/within/container /host/path/target
+```
+
 ## Stop a Container
 
 ```bash

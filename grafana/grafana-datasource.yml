@@ -1,0 +1,12 @@
+apiVersion: 1
+
+datasources:
+  - name: Prometheus
+    type: prometheus
+    access: proxy # "direct" can also be used if your Grafana server can directly communicate with Prometheus.
+    url: http://prometheus:9090 # Replace with the URL of your Prometheus server.
+    basicAuth: false # Set to true if your Prometheus server requires authentication.
+    isDefault: true # Set to true if you want this data source to be the default for all dashboards.
+    jsonData:
+      httpMethod: POST
+      manageAlerts: true
