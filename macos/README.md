@@ -12,7 +12,8 @@ Ctrl-Key ⌃
 Screenshot:                                   Shift-Cmd-4
 Refresh:                                      Cmd-R
 Mac Lock screen:                              Ctrl-Cmd-Q
-Teams Mute:                                   Cmd-Shift-M
+Open Emoji keyboard:                          Ctrl-Cmd-Space
+MS Teams Mute:                                Cmd-Shift-M
 Switch screen resolution (custom):            Ctrl-Alt-M
 Spotlight (search Apps):                      Cmd-Space
 Browser Open Developer Console:               F12
