@@ -1,4 +1,5 @@
-# Base configs
+# Docs
 
-This project contains basic configuration files for git, java, python and other stuff. \
-Visit the sub folders for more information on the specific files.
+This project contains information, guides and basic configuration files for popular dev tools like Git, Java, Python, VSCode, etc.
+
+Visit the sub folders for more information on the specific topics.
