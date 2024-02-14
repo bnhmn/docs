@@ -32,21 +32,23 @@ root: # The root logger config
     - error-counter
   level: INFO
 
-
+# Colored logging in Python
+# -------------------------
+#
 # Add in requirements.txt: 
 # pyyaml
 # colorlog
-
+#
 # # In Python:
 # def setup_logging(level="INFO"):
 #     """
 #     Setup logging.
-
+#
 #     :param level: The logging level.
 #     """
-#     with open(resolve_path("logging.yml"), encoding="utf-8") as config_file:
+#     with open("logging.yml", encoding="utf-8") as config_file:
 #         dict_config = yaml.safe_load(config_file)
-
+#
 #     dict_config["root"]["level"] = level
 #     logging.config.dictConfig(dict_config)
 #     logging.captureWarnings(True)
