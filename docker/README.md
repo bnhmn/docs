@@ -32,6 +32,9 @@ CMD [ "java", "-jar", "java-app.jar" ]
 
 </details>
 
+**Best practices** for writing Dockerfiles for applications written in different
+languages: https://docs.docker.com/language/.
+
 ## Build an Image
 
 To build an Image, open a terminal inside the directory containing the Dockerfile and execute the following command:
