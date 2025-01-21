@@ -54,6 +54,7 @@ VS Code Git Pull (Custom):                    Alt-P
 VS Code Quick Fix:                            Alt-Enter
 VS Code Add Cursors in selection:             Alt-Shift-I
 VS Code Add another Cursor at position:       Alt-CLICK
+VS Code Move current line up or down:         Alt-UP/DOWN
 VS Code Delete current line:                  Ctrl-K
 VS Code Execute File (Code Runner Extension): Ctrl-Alt-N
 VS Code Compare Folders (Extension):          Command-Palette -> Compare 2 folders
