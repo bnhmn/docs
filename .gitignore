@@ -2,5 +2,7 @@
 *.iml
 target
 out
+__pycache__
 venv
 .DS_Store
+*.log
