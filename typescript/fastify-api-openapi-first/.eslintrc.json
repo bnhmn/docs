@@ -1,0 +1,17 @@
+{
+  "extends": ["eslint:recommended", "plugin:@typescript-eslint/recommended"],
+  "parser": "@typescript-eslint/parser",
+  "parserOptions": {
+    "sourceType": "module",
+    "ecmaVersion": "latest"
+  },
+  "plugins": ["@typescript-eslint"],
+  "rules": {
+    // List of ESLint rules: https://eslint.org/docs/rules/
+    "prefer-const": "off", // Allow use let instead of const
+    "@typescript-eslint/no-unused-vars": ["warn", { "argsIgnorePattern": "^_", "varsIgnorePattern": "^[A-Z]$" }],
+    "@typescript-eslint/no-explicit-any": "off", // Allow use :any type
+    "@typescript-eslint/no-non-null-assertion": "off", // allow ! operator
+    "@typescript-eslint/no-empty-object-type": "off" // required for type declarations in vitest.setup.d.ts
+  }
+}

@@ -1,0 +1,173 @@
+openapi: 3.0.0
+info:
+  title: TODO API
+  description: |
+    With this service, you can manage your personal to-do list.
+    You can add new to-do entries, retrieve existing ones,
+    update them, and delete them as needed.
+  version: 1.0.0
+
+servers:
+  - url: http://localhost:8000
+
+components:
+  securitySchemes:
+    jwtAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+
+  schemas:
+    TodoState:
+      type: string
+      enum:
+        - open
+        - done
+
+    CreateTodoRequest:
+      type: object
+      required:
+        - title
+        - description
+      properties:
+        title:
+          type: string
+          minLength: 1
+          maxLength: 100
+          example: "Buy groceries"
+        description:
+          type: string
+          minLength: 0
+          maxLength: 500
+          example: "Buy milk, eggs, and bread"
+        state:
+          $ref: "#/components/schemas/TodoState"
+          default: open
+
+    UpdateTodoRequest:
+      type: object
+      properties:
+        title:
+          type: string
+          minLength: 1
+          maxLength: 100
+          example: "Go for a run"
+        description:
+          type: string
+          minLength: 0
+          maxLength: 500
+          example: "Run 5 kilometers in the morning"
+        state:
+          $ref: "#/components/schemas/TodoState"
+
+    TodoResponse:
+      type: object
+      properties:
+        id:
+          type: integer
+          example: 1
+        title:
+          type: string
+          example: "Read a book"
+        description:
+          type: string
+          example: "Read 'Atomic Habits' by James Clear"
+        state:
+          $ref: "#/components/schemas/TodoState"
+      required:
+        - id
+        - title
+        - description
+        - state
+
+security:
+  - jwtAuth: []
+
+paths:
+  /todos:
+    post:
+      operationId: createTodo
+      summary: Create a to-do
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/CreateTodoRequest"
+      responses:
+        201:
+          description: To-do was created
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/TodoResponse"
+    get:
+      operationId: fetchTodos
+      summary: Fetch all to-dos
+      responses:
+        200:
+          description: List of all to-dos
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/TodoResponse"
+
+  /todos/{id}:
+    get:
+      operationId: fetchTodoById
+      summary: Fetch a to-do
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        200:
+          description: The to-do
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/TodoResponse"
+        404:
+          description: To-do not found
+    patch:
+      operationId: updateTodoById
+      summary: Update a to-do
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/UpdateTodoRequest"
+      responses:
+        200:
+          description: To-do was updated
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/TodoResponse"
+        404:
+          description: To-do not found
+    delete:
+      operationId: deleteTodoById
+      summary: Delete a to-do
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        204:
+          description: To-do was deleted
+        404:
+          description: To-do not found
