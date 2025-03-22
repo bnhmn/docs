@@ -12,6 +12,7 @@ const port = parseInt(process.env.PORT ?? "8000");
 
 const fastify = Fastify({
   logger: true,
+  // See https://fastify.dev/docs/latest/Reference/Validation-and-Serialization/#schema-validator
   ajv: { customOptions: { strict: false } },
 });
 
