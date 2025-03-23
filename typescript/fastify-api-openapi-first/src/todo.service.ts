@@ -1,9 +1,5 @@
-import {
-	CreateTodoRequest,
-	TodoResponse,
-	UpdateTodoRequest,
-} from './generated';
-import * as repository from './todo.repository';
+import { CreateTodoRequest, TodoResponse, UpdateTodoRequest } from "./generated";
+import * as repository from "./todo.repository";
 
 export function createTodo(request: CreateTodoRequest): TodoResponse {
   return repository.createTodo(request);

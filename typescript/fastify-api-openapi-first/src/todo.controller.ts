@@ -1,5 +1,5 @@
-import { RouteHandlers } from './generated/fastify.gen';
-import * as service from './todo.service';
+import { RouteHandlers } from "./generated/fastify.gen";
+import * as service from "./todo.service";
 
 export const routeHandlers: RouteHandlers = {
   createTodo(request, reply) {

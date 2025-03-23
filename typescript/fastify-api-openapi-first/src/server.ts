@@ -1,8 +1,8 @@
-import dotenv from 'dotenv';
-import Fastify from 'fastify';
-import openapiGlue from 'fastify-openapi-glue';
+import dotenv from "dotenv";
+import Fastify from "fastify";
+import openapiGlue from "fastify-openapi-glue";
 
-import { routeHandlers } from './todo.controller';
+import { routeHandlers } from "./todo.controller";
 
 dotenv.config();
 
@@ -13,7 +13,8 @@ const port = parseInt(process.env.PORT ?? "8000");
 const fastify = Fastify({
   logger: true,
   // See https://fastify.dev/docs/latest/Reference/Validation-and-Serialization/#schema-validator
-  ajv: { customOptions: { strict: false } },
+  // See https://gist.github.com/robintan/b72b6c483d7dadd227fe1b67243e19be for custom validators
+  ajv: { customOptions: { strict: false, keywords: [] } },
 });
 
 // See https://github.com/hey-api/openapi-ts/tree/main/examples/openapi-ts-fastify
