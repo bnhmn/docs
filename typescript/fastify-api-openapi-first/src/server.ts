@@ -25,4 +25,4 @@ fastify.register(openapiGlue, {
   serviceHandlers: routeHandlers,
 });
 
-fastify.listen({ port });
+await fastify.listen({ port });
