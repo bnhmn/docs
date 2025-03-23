@@ -1,0 +1,17 @@
+meta {
+  name: Update TODO
+  type: http
+  seq: 5
+}
+
+patch {
+  url: http://localhost:8000/todos/1
+  body: json
+  auth: none
+}
+
+body:json {
+  {
+    "state": "done"
+  }
+}

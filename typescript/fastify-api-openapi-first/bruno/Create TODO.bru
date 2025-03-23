@@ -1,0 +1,18 @@
+meta {
+  name: Create TODO
+  type: http
+  seq: 2
+}
+
+post {
+  url: http://localhost:8000/todos
+  body: json
+  auth: none
+}
+
+body:json {
+  {
+    "title": "Buy bread",
+    "description": "Buy some bread!"
+  }
+}
