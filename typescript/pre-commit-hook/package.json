@@ -1,0 +1,13 @@
+{
+    "name": "pre-commit-hook",
+    "private": true,
+    "type": "module",
+    "scripts": {
+        "check:lint": "eslint . --ext .ts",
+        "check:format": "prettier --check ."
+    },
+    "license": "ISC",
+    "devDependencies": {
+        "lefthook": "^1.11.4"
+    }
+}
