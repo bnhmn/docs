@@ -3,7 +3,9 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "codegen": "rimraf ./src/generated && openapi-ts -p fastify -i openapi.yaml -o src/generated",
+    "codegen": "npm run codegen:server && npm run codegen:client",
+    "codegen:server": "rimraf ./src/generated && openapi-ts -i openapi.yaml -o src/generated -p fastify",
+    "codegen:client": "rimraf ./test/generated && openapi-ts -i openapi.yaml -o test/generated -p @hey-api/client-fetch",
     "dev": "tsx watch ./src/server.ts",
     "test": "vitest",
     "check": "eslint . --ext .ts && prettier --check . && spectral lint openapi.yaml",
@@ -11,12 +13,12 @@
     "postinstall": "npm run codegen"
   },
   "dependencies": {
-    "dotenv": "^16.4.7",
     "fastify": "^5.2.1",
     "fastify-openapi-glue": "^4.8.1"
   },
   "devDependencies": {
     "@eslint/js": "^9.23.0",
+    "@hey-api/client-fetch": "^0.8.3",
     "@hey-api/openapi-ts": "^0.64.12",
     "@stoplight/spectral-cli": "^6.14.3",
     "@types/node": "^22.13.11",
