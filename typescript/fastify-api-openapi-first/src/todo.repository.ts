@@ -1,9 +1,9 @@
 import { CreateTodoRequest, TodoResponse, UpdateTodoRequest } from "./generated";
 
 const todos: TodoResponse[] = [
-  { id: 1, title: "Buy flowers", description: "", state: "open" },
-  { id: 2, title: "Cook dinner", description: "", state: "open" },
-  { id: 3, title: "Clean the bathroom", description: "", state: "open" },
+  { id: 1, title: "Buy flowers", description: "Buy some flowers", state: "open" },
+  { id: 2, title: "Cook dinner", description: "Cook some dinner", state: "open" },
+  { id: 3, title: "Clean the bathroom", description: "Clean the bathroom", state: "open" },
 ];
 let next_todo_id = todos.length + 1;
 
