@@ -8,8 +8,7 @@
     "test": "vitest",
     "check": "eslint . --ext .ts && prettier --check . && spectral lint openapi.yaml",
     "format": "prettier --write .",
-    "postinstall": "npm run codegen",
-    "prepare": "husky"
+    "postinstall": "npm run codegen"
   },
   "dependencies": {
     "dotenv": "^16.4.7",
@@ -23,7 +22,6 @@
     "@types/node": "^22.13.11",
     "eslint": "^9.23.0",
     "globals": "^16.0.0",
-    "husky": "^9.1.7",
     "prettier": "^3.5.3",
     "rimraf": "^6.0.1",
     "tsx": "^4.19.3",
