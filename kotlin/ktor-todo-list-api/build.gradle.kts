@@ -5,14 +5,14 @@ plugins {
     kotlin("jvm") version "2.1.20"
     id("io.ktor.plugin") version "3.1.1"
     id("org.jetbrains.kotlin.plugin.serialization") version "2.1.20"
+    id("com.diffplug.spotless") version "7.0.2"
 }
 
-group = "kotlin.todolist"
+group = "todolist"
 version = "0.0.1"
 
 application {
     mainClass = "io.ktor.server.netty.EngineMain"
-
     val isDevelopment: Boolean = project.ext.has("development")
     applicationDefaultJvmArgs = listOf("-Dio.ktor.development=$isDevelopment")
 }
@@ -22,7 +22,6 @@ repositories {
 }
 
 dependencies {
-    implementation("io.ktor:ktor-server-request-validation")
     implementation("io.ktor:ktor-server-core")
     implementation("io.ktor:ktor-server-host-common")
     implementation("io.ktor:ktor-server-status-pages")
@@ -34,4 +33,10 @@ dependencies {
     implementation("io.ktor:ktor-server-config-yaml")
     testImplementation("io.ktor:ktor-server-test-host")
     testImplementation("org.jetbrains.kotlin:kotlin-test-junit:$kotlin_version")
+}
+
+spotless {
+    kotlin {
+        ktfmt("0.53").kotlinlangStyle().configure { }
+    }
 }
