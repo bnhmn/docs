@@ -1,5 +1,6 @@
 import Fastify from "fastify";
 import openapiGlue from "fastify-openapi-glue";
+import { fileURLToPath } from "node:url";
 
 import { routeHandlers } from "./todo.controller";
 
@@ -25,7 +26,7 @@ export async function startServer(port = 0) {
   return fastify;
 }
 
-if (import.meta.url === `file://${process.argv[1]}`) {
+if (fileURLToPath(import.meta.url) === process.argv[1]) {
   const port = parseInt(process.env.PORT ?? "8000");
   await startServer(port);
 }
