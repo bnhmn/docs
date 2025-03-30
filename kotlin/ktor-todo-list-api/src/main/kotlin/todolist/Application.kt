@@ -11,8 +11,13 @@ import io.ktor.server.plugins.contentnegotiation.ContentNegotiation
 import io.ktor.server.plugins.statuspages.StatusPages
 import io.ktor.server.response.respond
 import io.ktor.server.routing.routing
+import org.koin.dsl.module
+import org.koin.ktor.plugin.Koin
 import org.slf4j.event.Level
 import todolist.api.todoRoutes
+import todolist.model.InMemoryTodoRepository
+import todolist.model.TodoRepository
+import todolist.model.TodoService
 
 fun main(args: Array<String>) {
     io.ktor.server.netty.EngineMain.main(args)
@@ -30,6 +35,15 @@ fun Application.module() {
             log.error(cause.message, cause)
             call.respond(InternalServerError)
         }
+    }
+    // Koin is a dependency injection library: https://insert-koin.io/docs/quickstart/kotlin
+    install(Koin) {
+        modules(
+            module {
+                single<TodoService> { TodoService(repository = get()) }
+                single<TodoRepository> { InMemoryTodoRepository() }
+            }
+        )
     }
     routing { todoRoutes() }
 }

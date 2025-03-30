@@ -1,6 +1,3 @@
-val kotlin_version: String by project
-val logback_version: String by project
-
 plugins {
     kotlin("jvm") version "2.1.20"
     id("io.ktor.plugin") version "3.1.1"
@@ -22,6 +19,7 @@ repositories {
 }
 
 dependencies {
+    implementation("io.insert-koin:koin-ktor3:4.1.0-Beta5")
     implementation("io.ktor:ktor-server-core")
     implementation("io.ktor:ktor-server-host-common")
     implementation("io.ktor:ktor-server-status-pages")
@@ -29,10 +27,10 @@ dependencies {
     implementation("io.ktor:ktor-server-content-negotiation")
     implementation("io.ktor:ktor-serialization-kotlinx-json")
     implementation("io.ktor:ktor-server-netty")
-    implementation("ch.qos.logback:logback-classic:$logback_version")
+    implementation("ch.qos.logback:logback-classic:1.4.14")
     implementation("io.ktor:ktor-server-config-yaml")
     testImplementation("io.ktor:ktor-server-test-host")
-    testImplementation("org.jetbrains.kotlin:kotlin-test-junit:$kotlin_version")
+    testImplementation("org.jetbrains.kotlin:kotlin-test-junit:2.1.20")
 }
 
 spotless {

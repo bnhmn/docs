@@ -1,9 +1,6 @@
 package todolist.model
 
-class TodoService {
-    // TODO: DI
-    private val repository: TodoRepository = InMemoryTodoRepository()
-
+class TodoService(private val repository: TodoRepository) {
     fun createTodo(request: TodoCreate): Todo {
         return repository.createTodo(request)
     }

@@ -12,12 +12,12 @@ import io.ktor.server.routing.patch
 import io.ktor.server.routing.post
 import io.ktor.server.routing.route
 import io.ktor.server.util.getOrFail
+import org.koin.ktor.ext.get
 import todolist.model.TodoService
 
-// TODO: DI
-val service = TodoService()
-
 fun Route.todoRoutes() {
+    val service: TodoService = get()
+
     route("/todos") {
         post {
             val request = call.receive<CreateTodoRequest>()
@@ -27,7 +27,7 @@ fun Route.todoRoutes() {
             call.response.status(HttpStatusCode.Created)
             call.respond(newTodo.toResponse())
         }
-        get() {
+        get {
             val todos = service.fetchTodos()
             call.respond(todos.toResponse())
         }
