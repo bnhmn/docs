@@ -1,6 +1,6 @@
 import { describe, expect, test } from "vitest";
 
-import { createTodo, deleteTodoById, fetchTodoById, fetchTodos, updateTodoById } from "./generated/sdk.gen";
+import { createTodo, deleteTodoById, fetchTodoById, fetchTodos, updateTodoById } from "../src/generated/sdk.gen";
 import { client } from "./utils/client";
 
 describe("TODO", () => {

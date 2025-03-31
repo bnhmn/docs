@@ -3,9 +3,7 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "codegen": "npm run codegen:server && npm run codegen:client",
-    "codegen:server": "rimraf ./src/generated && openapi-ts -i openapi.yaml -o src/generated -p fastify",
-    "codegen:client": "rimraf ./test/generated && openapi-ts -i openapi.yaml -o test/generated -p @hey-api/client-fetch",
+    "codegen": "rimraf ./src/generated && openapi-ts -i openapi.yaml -o src/generated -p fastify -p @hey-api/client-fetch -p @hey-api/sdk",
     "dev": "tsx watch ./src/server.ts",
     "test": "vitest",
     "check": "eslint . --ext .ts && prettier --check . && spectral lint openapi.yaml",
