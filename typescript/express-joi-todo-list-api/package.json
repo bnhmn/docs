@@ -1,0 +1,30 @@
+{
+  "name": "todo-list-api",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "tsx watch ./src/app.ts",
+    "build": "rimraf ./out && esbuild ./src/app.ts --bundle --outdir=out --format=cjs --platform=node --minify --target=es6",
+    "serve": "node ./out/app.js",
+    "format": "prettier --write ."
+  },
+  "dependencies": {
+    "cors": "^2.8.5",
+    "express": "^4.21.2",
+    "express-async-errors": "^3.1.1",
+    "express-oauth2-jwt-bearer": "^1.6.0",
+    "express-validation": "^4.1.1",
+    "morgan": "^1.10.0"
+  },
+  "devDependencies": {
+    "@types/cors": "^2.8.17",
+    "@types/json-schema": "^7.0.12",
+    "@types/morgan": "^1.9.9",
+    "@types/node": "^22.13.11",
+    "esbuild": "^0.25.2",
+    "prettier": "^3.5.3",
+    "rimraf": "^6.0.1",
+    "tsx": "^4.19.3",
+    "typescript": "^5.8.2"
+  }
+}

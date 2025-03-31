@@ -1,4 +1,4 @@
-import { CreateTodoRequest, TodoResponse, UpdateTodoRequest } from "./generated";
+import { CreateTodoRequest, TodoResponse, UpdateTodoRequest } from "./todo.model";
 
 const todos: TodoResponse[] = [
   { id: 1, title: "Buy flowers", description: "Buy some flowers", state: "open" },
