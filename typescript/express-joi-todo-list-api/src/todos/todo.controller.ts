@@ -4,6 +4,7 @@ import { optionalAuth } from "../auth";
 import { Joi, validate } from "../validation";
 import * as service from "./todo.service";
 
+// See https://expressjs.com/en/guide/routing.html
 export const todoRouter = express.Router();
 
 todoRouter.post(
