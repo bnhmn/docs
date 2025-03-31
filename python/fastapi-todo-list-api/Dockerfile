@@ -15,7 +15,7 @@ RUN python3 -m venv "$PYTHON_VENV"
 COPY requirements.txt .
 RUN pip install --no-cache-dir -r requirements.txt
 
-COPY *.py ./
+COPY todo .
 
 ENV PORT="8000"
-CMD ["bash",  "-c", "uvicorn app:app --host=0.0.0.0 --port=${PORT}"]
+CMD ["bash",  "-c", "uvicorn --app-dir=src app:app --host=0.0.0.0 --port=${PORT}"]

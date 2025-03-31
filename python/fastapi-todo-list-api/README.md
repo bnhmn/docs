@@ -9,8 +9,8 @@ This is a simple example of how to use [FastAPI](https://fastapi.tiangolo.com/) 
 
 * Ensure Python 3 is installed on your system.
 * Run `pip install -r requirements.txt` to install all Python libraries.
-* Run `python -m uvicorn app:app --port 8000 --reload` to start the Service.
-* Find the OpenAPI documentation of the running service here: http://127.0.0.1:8000/.
+* Run `python -m uvicorn --app-dir=src app:app --port 8000 --reload` to start the Service.
+* Find the OpenAPI documentation of the running service here: <http://127.0.0.1:8000/>.
 
 ## How to Build
 

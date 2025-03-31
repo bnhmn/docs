@@ -1,3 +1,2 @@
-selenium==4.17.2
 fastapi==0.109.2
 uvicorn[standard]==0.27.0.post1
