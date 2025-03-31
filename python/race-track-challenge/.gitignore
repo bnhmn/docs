@@ -1,0 +1,7 @@
+venv
+out
+__pycache__
+.idea
+*.iml
+.coverage
+*.csv
