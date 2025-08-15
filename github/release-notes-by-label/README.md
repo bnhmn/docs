@@ -2,7 +2,7 @@
 
 Auto-generate the changelog for a GitHub release from categorized pull requests. See [Sample Output](#sample-output).
 
-## Set up the Labels
+## How to Setup
 
 Create the labels at <https://github.com/[owner-name]/[repo-name]/labels>.
 
@@ -19,17 +19,12 @@ Create the labels at <https://github.com/[owner-name]/[repo-name]/labels>.
 | style        | A new code style was applied              | #1d76db      |
 | test         | Tests were enhanced or added              | #0e8a16      |
 
-## Set up the release.yaml file
-
 Copy the [release.yml](release.yml) file to `.github/release.yml` inside your GitHub repository.
 
-## Label your pull requests
+## How to Use
 
-Make some code changes, open a pull request and label it accordingly.
-
-## Create a GitHub Release
-
-Create a new release at <https://github.com/[owner-name]/[repo-name]/releases/new>.
+* Make some code changes, open a pull request and label it accordingly.
+* Create a new GitHub release at <https://github.com/[owner-name]/[repo-name]/releases/new>.
 
 ## Sample Output
 
