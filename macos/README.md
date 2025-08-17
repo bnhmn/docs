@@ -1,6 +1,9 @@
 # macOS
 
-This folder contains information for macOS.
+[macOS](https://en.wikipedia.org/wiki/MacOS) is an operating system developed by [Apple Inc](https://www.apple.com/)
+for Macintosh computers. Known for its user-friendly interface and sleek design, it offers a robust application
+ecosystem, seamless integration with other Apple products, and a strong emphasis on security. macOS is popular among
+both everyday users and creative professionals.
 
 ## Useful Shortcuts
 
