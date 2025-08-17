@@ -150,3 +150,18 @@ docker cp <containerId>:/file/path/within/container /host/path/target
 ```bash
 docker stop my-container
 ```
+
+## Print OS and Machine Infos
+
+To debug multi-platform-image issues, it can be helpful to display the operating system and architecture of the
+current machine using the following command:
+
+```bash
+python -c "import platform; print(platform.system(), platform.machine())"
+```
+
+Sample output:
+
+```text
+Darwin arm64
+```
