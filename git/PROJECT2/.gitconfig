@@ -1,0 +1,4 @@
+[user]
+  email = john.doe@company-b.com
+[credential "https://github.com"]
+  username = john-doe-company-b

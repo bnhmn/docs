@@ -13,7 +13,10 @@
 [pager]
   branch = cat      # Use cat as the pager for the git branch command (on macOS the default is less)
 
-[includeIf "gitdir:~/git/TENANT1/"]
-  path = ~/git/TENANT1/.gitconfig   # Include this .gitconfig if git repository is inside ~/git/TENANT1 folder
-[includeIf "gitdir:~/git/TENANT2/"]
-  path = ~/git/TENANT2/.gitconfig   # Include this .gitconfig if git repository is inside ~/git/TENANT2 folder
+[includeIf "gitdir:~/git/PROJECT1/"]
+  # Include this config if git repo is inside PROJECT1 folder
+  path = ~/git/PROJECT1/.gitconfig
+
+[includeIf "gitdir:~/git/PROJECT2/"]
+  # Include this config if git repo is inside PROJECT2 folder
+  path = ~/git/PROJECT2/.gitconfig
