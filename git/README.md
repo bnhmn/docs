@@ -9,6 +9,17 @@ efficiency, flexibility, and support for branching and merging.
 
 See <https://git-scm.com/docs/gittutorial>.
 
+## Git Commands
+
+```text
+Accept my version of a file        git checkout --ours -- <filename>
+Accept their version of a file     git checkout --theirs -- <filename>
+```
+
+## Git Tooling
+
+* [git-cliff](https://git-cliff.org/docs/) - Generate a changelog file from the Git history.
+
 ## Git Config
 
 Git configuration files contains settings that influence the Git commands' behavior.
@@ -21,7 +32,7 @@ See [git config](https://git-scm.com/docs/git-config#_configuration_file) for ex
 
 This is a sample user configuration file:
 
-```toml
+```ini
 [user]
   name = John Doe
 [core]
@@ -40,7 +51,7 @@ This is a sample user configuration file:
                     # (on macOS the default is less)
 ```
 
-## Multi Tenant Setup
+### Multi Tenant Setup
 
 If you work for different companies or simply want to separate business projects from personal ones, you can create
 separate directories for each project and set up individual Git configurations for each one.
@@ -57,7 +68,7 @@ git
 
 Extend your Git user configuration file at `~/.gitconfig`:
 
-```toml
+```ini
 [includeIf "gitdir:~/git/PROJECT1/"]
   # Include this config if git repo is inside PROJECT1 folder
   path = ~/git/PROJECT1/.gitconfig
@@ -69,7 +80,7 @@ Extend your Git user configuration file at `~/.gitconfig`:
 
 Create the `PROJECT1/.gitconfig` file
 
-```toml
+```ini
 [user]
   email = john.doe@company-a.com
 [credential "https://github.com"]
@@ -78,7 +89,7 @@ Create the `PROJECT1/.gitconfig` file
 
 Create the `PROJECT2/.gitconfig` file
 
-```toml
+```ini
 [user]
   email = john.doe@company-b.com
 [credential "https://github.com"]
