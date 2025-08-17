@@ -79,16 +79,16 @@ Eclipse Open Terminal:                        Ctrl-Alt-T
 
 Install unsigned DMG/PKG App:                 xattr -d com.apple.quarantine <NAME>.pkg
 Show Python installation path:                python -m site
-Change default app for file extension:        Right click file in Finder -> Information -> Name & Suffix 
+Change default app for file extension:        Right click file in Finder -> Information -> Name & Suffix
                                               -> Change App and click "Change for all"
-Ctrl+Space default:                           switch input sources 
+Ctrl+Space default:                           switch input sources
                                               (disable under: Preferences>Keyboard>Shortcuts>Input Sources)
 ```
 
 ## Files
 
 * [env.sh](env.sh) - Shell startup script
-* [toggle_screen_resolution.sh](toggle_screen_resolution.sh) - Shell script assigned to a custom Keyboard Shortcut
+* [toggle-screen-resolution.sh](toggle-screen-resolution.sh) - Shell script assigned to a custom Keyboard Shortcut
 
 ## Useful Applications
 
