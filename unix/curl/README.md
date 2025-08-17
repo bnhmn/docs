@@ -1,17 +1,18 @@
 # cURL
 
 [cURL](https://curl.se/) is a command-line tool and library for fetching and transferring data from URLs.
-It is commonly used for makingvrequests to web services, downloading files, and testing APIs. It is widely
-used in scripting environments for itsflexibility and ease of use.
+It is commonly used for making requests to web services, downloading files, and testing APIs. It is widely
+used for scripting because of its flexibility and ease of use.
 
 ## Safe Curl Command
 
 A curl command with default configuration:
 
-* Fail on status code >= 400 AND print response body to stderr
-* Follow HTTP redirects
+* Fail on status code greater or equal to 400 and print response body to stderr
+* Follow http redirects
 * Retry on timeouts, server errors and too many requests (429)
-* NOTE: In case of retries, the stdout response contains multiple response bodies.
+
+NOTE: In case of retries, the stdout response contains multiple response bodies.
 
 ```bash
 #!/usr/bin/env bash
