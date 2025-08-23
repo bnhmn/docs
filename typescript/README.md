@@ -12,4 +12,5 @@ versatile for full-stack development.
 
 * [Prettier](https://prettier.io/) - An opinionated code formatter
 * [typescript-eslint](https://typescript-eslint.io/) - A TypeScript linter.
+* [biome](https://github.com/biomejs/biome) - A fast code formatter and linter, written in Rust.
 * [lefthook](https://lefthook.dev/intro.html) - A Git hooks manager.
