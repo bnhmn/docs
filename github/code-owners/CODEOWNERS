@@ -1,0 +1,4 @@
+# Code owners are automatically added as pull request reviewers.
+# See https://docs.github.com/en/repositories/managing-your-repositorys-settings-and-features/customizing-your-repository/about-code-owners
+
+* @github-org/team-name
