@@ -6,21 +6,86 @@ A dashboard visualizes metrics of the service, such as CPU usage, memory usage, 
 
 [Prometheus](https://prometheus.io/) is a metrics scraper that pulls metrics from your applications and acts as a data source for Grafana.
 
-This project contains a [docker-compose.yml](./docker-compose.yml) file to quickly spin up a Grafana instance locally.
+<img src="./sample-dashboard.png" width="700px" alt="Sample Grafana Dashboard">
 
-Run `docker compose up` to start the following services:
+## Resources
 
-- Grafana on <http://localhost:3000/> (username: `admin`, password: `admin`)
-- Prometheus on <http://localhost:9090/>
+* [Grafana Documentation](https://grafana.com/docs/grafana/latest/) -
+  Latest Grafana documentation.
+* [Prometheus Documentation](https://prometheus.io/docs/prometheus/latest/getting_started/) -
+  Latest Prometheus documentation.
+* [Local Grafana Setup](./local-setup/) -
+  A docker compose file to quickly set up a Grafana and a Prometheus instance.
 
-## Prometheus Configuration
+## Counter Metrics
 
-Prometheus is configured in file [prometheus.yml](./prometheus.yml).
-It is setup to scrape metrics from:
+When you want to display the increase of a counter metric in Grafana with `increase(metric[$__rate_interval])`,
+you need to ensure that the rate interval used by Grafana is larger than the scrape interval of Prometheus.
+Otherwise, you always get a **no data** result for mathematical reasons.
 
-- **prometheus**: The Prometheus instance itself running inside the Docker container.
-- **spring-boot**: A Spring Boot application running on the host machine outside of Docker.
+According to [the docs](https://grafana.com/docs/grafana/latest/datasources/prometheus/template-variables/#use-__rate_interval),
+Grafana should automatically take care of this if the Prometheus connector is properly configured.
 
-## Grafana Configuration
+## PromQL Examples
 
-The connection from Grafana to Prometheus is configured in file [grafana-datasource.yml](./grafana-datasource.yml).
+[PromQL](https://prometheus.io/docs/prometheus/latest/querying/basics/) is the query language used to fetch data from
+Prometheus.
+
+### Availability
+
+For each connected service, Prometheus stores a **up** time series. It is **1** if the instance is healthy,
+i.e. reachable, or **0** if the scrape failed. It is useful for instance availability monitoring.
+See <https://prometheus.io/docs/concepts/jobs_instances>.
+
+```js
+avg(avg_over_time(up{kubernetes_namespace="$namespace", name="$service", instance="$service.$namespace.svc:80"}[$__range]))
+```
+
+### Kubernetes Pod Memory Consumption
+
+```js
+sum by (pod)(container_memory_usage_bytes{namespace="$namespace"})
+```
+
+### Kubernetes Pod Instances Count
+
+```js
+sum(kube_pod_container_status_running{namespace="$namespace", container="$service"})
+sum(kube_deployment_status_replicas_unavailable{namespace="$namespace", deployment="$deployment"})
+```
+
+### Java Service Uptime
+
+```js
+min(process_uptime_seconds{kubernetes_namespace="$namespace", name="$service", instance=~"$instance"})
+```
+
+### Java Service Resource Consumption
+
+```js
+sum(system_cpu_usage{kubernetes_namespace="$namespace", name="$service", instance=~"$instance"})
+sum(jvm_memory_used_bytes{kubernetes_namespace="$namespace", name="$service", instance=~"$instance"})
+sum(jvm_memory_max_bytes{kubernetes_namespace="$namespace", name="$service", instance=~"$instance"})
+```
+
+### Java Service Requests
+
+Incoming Requests
+
+```js
+sum by (outcome) (increase(http_server_requests_seconds_count{kubernetes_namespace="$namespace", name="$service", instance=~"$instance", uri=~"$incoming_endpoint", client_name=~"$client_name"}[$__rate_interval]))
+```
+
+Outgoing Requests
+
+```js
+sum by (outcome) (increase(http_client_requests_seconds_count{kubernetes_namespace="$namespace", name="$service", instance=~"$instance", uri=~"$outgoing_endpoint"}[$__rate_interval]))
+```
+
+Response time
+
+```js
+sum(increase(http_server_requests_seconds_sum{kubernetes_namespace="$namespace", name="$service", instance=~"$instance", uri=~"$incoming_endpoint", client_name=~"$client_name"}[$__rate_interval]))
+/
+sum(increase(http_server_requests_seconds_count{kubernetes_namespace="$namespace", name="$service", instance=~"$instance", uri=~"$incoming_endpoint", client_name=~"$client_name"}[$__rate_interval]))
+```
