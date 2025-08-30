@@ -14,3 +14,9 @@ versatile for full-stack development.
 * [typescript-eslint](https://typescript-eslint.io/) - A TypeScript linter.
 * [biome](https://github.com/biomejs/biome) - A fast code formatter and linter, written in Rust.
 * [lefthook](https://lefthook.dev/intro.html) - A Git hooks manager.
+
+## Print all npm dependencies
+
+```bash
+npm list --depth=3 >> result.txt
+```
