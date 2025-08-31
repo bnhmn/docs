@@ -4,9 +4,12 @@
 of your systems, services and applications.
 A dashboard visualizes metrics of the service, such as CPU usage, memory usage, requests per second, and error counts.
 
+<img src="./sample-dashboard.png" width="700px" alt="Sample Grafana Dashboard">
+
+<https://grafana.com/grafana/dashboards/6756-spring-boot-statistics>
+
 [Prometheus](https://prometheus.io/) is a metrics scraper that pulls metrics from your applications and acts as a data source for Grafana.
 
-<img src="./sample-dashboard.png" width="700px" alt="Sample Grafana Dashboard">
 
 ## Resources
 
@@ -14,7 +17,7 @@ A dashboard visualizes metrics of the service, such as CPU usage, memory usage, 
   Latest Grafana documentation.
 * [Prometheus Documentation](https://prometheus.io/docs/prometheus/latest/getting_started/) -
   Latest Prometheus documentation.
-* [Local Grafana Setup](./local-setup/) -
+* [local-setup](./local-setup/) -
   A docker compose file to quickly set up a Grafana and a Prometheus instance.
 
 ## Counter Metrics
