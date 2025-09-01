@@ -4,7 +4,7 @@ Load and performance testing is about checking if system can handle a lot of use
 slowing down or crashing. It tests how fast the system responds and if it works reliably under load. The goal is to find
 and fix any issues that could slow down or break the system when it's used heavily.
 
-<img alt="Load test types at a glance" width="750px" src="https://grafana.com/media/docs/k6-oss/chart-load-test-types-overview.png">
+<img alt="Load test types at a glance" width="800px" src="https://grafana.com/media/docs/k6-oss/chart-load-test-types-overview.png">
 
 <https://grafana.com/load-testing/types-of-load-testing/>
 
@@ -31,7 +31,7 @@ The swarming process and the system's performance can be monitored from a web UI
 
 
 
-<img alt="Locust Web UI" width="600px" src="https://docs.locust.io/en/stable/_images/webui-running-statistics-light.png">
+<img alt="Locust Web UI" width="800px" src="https://docs.locust.io/en/stable/_images/webui-running-statistics-light.png">
 
 <https://docs.locust.io/en/stable/quickstart.html>
 
