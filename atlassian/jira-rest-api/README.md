@@ -5,7 +5,7 @@
 Jira 10.0 REST API Docs: <https://developer.atlassian.com/server/jira/platform/rest> \
 Jira 9.12 REST API Docs: <https://docs.atlassian.com/software/jira/docs/api/REST/9.12.0/> \
 XRAY 1.0 API Docs: <https://docs.getxray.app/display/XRAY/v1.0> \
-XRAY 2.0 API Docs: <https://docs.getxray.app/display/XRAY/v2.0> \
+XRAY 2.0 API Docs: <https://docs.getxray.app/display/XRAY/v2.0>
 
 ## Examples
 
@@ -24,7 +24,7 @@ curl \
 {
   "self": "https://example.com/jira/rest/api/2/user?username=example",
     "key": "JIRAUSER000001",
-  "name": "example",
+    "name": "example",
     "emailAddress": "john.doe@example.com",
     "displayName": "John Doe",
     "active": true,
