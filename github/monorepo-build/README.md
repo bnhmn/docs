@@ -110,7 +110,6 @@ jobs:
       - name: Create version tag
         run: ...
     outputs:
-      release_created: ${{ steps.prepare-release.outputs.release_created }}
       folders: ${{ steps.detect-modules.outputs.folders }}
 
   build:
