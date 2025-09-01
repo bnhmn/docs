@@ -4,7 +4,7 @@
 of your systems, services and applications.
 A dashboard visualizes metrics of the service, such as CPU usage, memory usage, requests per second, and error counts.
 
-<img src="./sample-dashboard.png" width="700px" alt="Sample Grafana Dashboard">
+<img src="./sample-dashboard.png" width="1000px" alt="Sample Grafana Dashboard">
 
 <https://grafana.com/grafana/dashboards/6756-spring-boot-statistics>
 
