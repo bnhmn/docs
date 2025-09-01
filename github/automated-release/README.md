@@ -22,7 +22,7 @@ builds and publishes the software artifact.
 <https://github.com/googleapis/release-please>
 
 Release Please automatically calculates the next release version and the changelog from the commit messages.
-It requires your commit messages to adhere to the [Conventional Commits](https://www.conventionalcommits.org/) format:
+This requires your commit messages to follow the [Conventional Commits](https://www.conventionalcommits.org/) format:
 
 ```text
 feat(ui): add Button component
@@ -30,7 +30,7 @@ feat(ui): add Button component
 
 ### Setup
 
-To set it up, you need to create GitHub workflow that runs the [release-please-action](https://github.com/googleapis/release-please-action).
+To set it up, you need to create a GitHub workflow that runs the [release-please-action](https://github.com/googleapis/release-please-action).
 You can configure it through the [release-please-config.json](https://github.com/googleapis/release-please/blob/main/docs/manifest-releaser.md)
 file.
 
