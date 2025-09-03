@@ -9,13 +9,18 @@ tools that allow you to automate this process:
 * You need to create a tag for the new version
 * You need to build the software artifact
 
-## Release Please
+## Tools
+
+### release-please
 
 [Release Please](https://github.com/googleapis/release-please) is a tool that manages a draft release pull request that
 is constantly updated whenever a change is merged into the main branch. In this pull request, you can always see which
-version the next release will have and how the changelog will look like. To create the release, you only need to merge
-the pull request. After the merge, it creates a tag and a GitHub Release for the new version, and your build workflow
-builds and publishes the software artifact.
+version the next release will have and how the changelog will look like. It determines the next release version and the
+changelog from [conventional commit](https://www.conventionalcommits.org/) messages. To create the release, you only need
+to merge the pull request. After the merge, it creates a tag and a GitHub Release for the new version, and your build
+workflow builds and publishes the software artifact.
+
+<details>
 
 <img alt="Release Pull Request" width="500px" src="https://github.com/googleapis/release-please/raw/main/screen.png">
 
@@ -33,8 +38,6 @@ feat(ui): add Button component
 To set it up, you need to create a GitHub workflow that runs the [release-please-action](https://github.com/googleapis/release-please-action).
 You can configure it through the [release-please-config.json](https://github.com/googleapis/release-please/blob/main/docs/manifest-releaser.md)
 file.
-
-<details>
 
 #### .github/workflows/build-release.yaml
 
@@ -100,8 +103,6 @@ jobs:
 
 </details>
 
-## Other Tools
-
 ### semantic-release
 
 [semantic-release](https://github.com/semantic-release/semantic-release) is a npm-based tool that can determine the next
@@ -109,6 +110,12 @@ release version and the changelog from conventional commit messages.
 With many available [plugins](https://github.com/semantic-release/semantic-release/blob/master/docs/extending/plugins-list.md),
 it offers great flexibility. It has similar capabilities as Release Please and provides more customization options,
 though it is a bit harder to set up.
+
+### git-cliff
+
+[git-cliff](https://github.com/orhun/git-cliff) and the [git-cliff-action](https://github.com/orhun/git-cliff-action)
+can generate a changelog from conventional commit messages as well as regex-powered custom parsers. The changelog template
+can be customized with a configuration file to match the desired format.
 
 ### release-drafter
 
@@ -118,7 +125,15 @@ the merged pull requests and can automatically create a draft release with the r
 However, it can neither update the version in the project manifest nor create a tag or save the changelog in the
 repository.
 
-You need to build the rest of the release flow manually using additional actions:
+### changelog-updater-action
 
-* [stefanzweifel/changelog-updater-action](https://github.com/stefanzweifel/changelog-updater-action)
-* [peter-evans/create-pull-request](https://github.com/peter-evans/create-pull-request)
+[stefanzweifel/changelog-updater-action](https://github.com/stefanzweifel/changelog-updater-action) is a GitHub action
+to update a CHANGELOG.md file with the latest release notes from GitHub.
+
+### create-pull-request
+
+[peter-evans/create-pull-request](https://github.com/peter-evans/create-pull-request) is a GitHub action to create a pull
+request for changes you've made to files within your GitHub workflow. The action will create a pull request if one does
+not already exist, or update an existing pull request if it does.
+
+
