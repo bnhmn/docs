@@ -115,7 +115,96 @@ though it is a bit harder to set up.
 
 [git-cliff](https://github.com/orhun/git-cliff) and the [git-cliff-action](https://github.com/orhun/git-cliff-action)
 can generate a changelog from conventional commit messages as well as regex-powered custom parsers. The changelog template
-can be customized with a configuration file to match the desired format.
+can be customized with a configuration file to match the desired format. See these [examples](https://git-cliff.org/docs/templating/examples).
+
+<details>
+
+```toml
+# cliff.toml
+# git-cliff configuration file
+# https://git-cliff.org/docs/configuration
+
+[changelog]
+# A Tera template to be rendered as the changelog's header.
+# See https://keats.github.io/tera/docs/#introduction
+header = """
+# Changelog\n
+All notable changes to this project will be documented in this file.
+\n---\n
+"""
+# A Tera template to be rendered for each release in the changelog.
+# See https://keats.github.io/tera/docs/#introduction
+body = """
+{% macro print_commit(commit) -%}
+    - {% if commit.scope %}<ins>{{ commit.scope }}</ins> - {% endif %}{{ commit.message | upper_first }}\
+{% endmacro -%}
+
+{% if version %}\
+    ## [{{ version }}](<REPO>/releases/tag/{{ version }}) - {{ timestamp | date(format="%Y-%m-%d") }}
+{% else %}\
+    ## [unreleased]
+{% endif %}\
+
+{% for group, commits in commits | group_by(attribute="group") %}
+    ### {{ group | striptags | trim | upper_first }}
+    {% for commit in commits
+    | filter(attribute="scope")
+    | sort(attribute="scope") %}
+        {{ self::print_commit(commit=commit) }}
+    {%- endfor %}
+    {% for commit in commits %}
+        {%- if not commit.scope -%}
+            {{ self::print_commit(commit=commit) }}
+        {% endif -%}
+    {% endfor -%}
+{% endfor -%}
+
+{% if previous.version %}
+---\n
+{% endif %}
+"""
+# Remove leading and trailing whitespaces from the changelog's body.
+trim = true
+# An array of regex based postprocessors to modify the changelog.
+postprocessors = [
+  # Replace the placeholders with a URL.
+  { pattern = '<REPO>', replace = "https://github.com/my-github-org/my-repo" },
+  { pattern = '<JIRA>', replace = "https://example.com/jira/browse" },
+]
+
+[git]
+# Parse commits according to the conventional commits specification.
+# See https://www.conventionalcommits.org
+conventional_commits = true
+# Exclude commits that do not match the conventional commits specification.
+filter_unconventional = true
+# An array of regex based parsers to modify commit messages prior to further processing.
+commit_preprocessors = [
+  # Replace issue numbers with link templates to be updated in `changelog.postprocessors`.
+  { pattern = '\((\w+\s)?#([0-9]+)\)', replace = "([#${2}](<REPO>/issues/${2}))" },
+  { pattern = 'CVE-\d{4}-\d+', replace = "[[${0}](https://www.google.com/search?q=${0})]" },
+  { pattern = '\(([A-Z][A-Z]+-\d+)\)', replace = "[[${1}](<JIRA>/${1})]" }
+]
+# An array of regex based parsers for extracting data from the commit message.
+# Assigns commits to groups.
+# Optionally sets the commit's scope and can decide to exclude commits from further processing.
+commit_parsers = [
+  { message = "!: ", group = "<!-- 0 -->💥 BREAKING CHANGES" },
+  { message = "^feat", group = "<!-- 1 -->🚀 New Features" },
+  { message = "^fix", group = "<!-- 2 -->🐞 Bug Fixes" },
+  { message = "^perf", group = "<!-- 3 -->⚡ Performance" },
+  { message = "^doc", group = "<!-- 4 -->📚 Documentation" },
+  { message = "^chore\\(deps.*\\)", scope = "", group = "<!-- 5 -->🔨 Dependency Upgrades" },
+  { message = "^style|^refactor|^test|^ci", group = "<!-- 6 -->⚙️ Technical Enhancements" },
+  { message = "^revert", group = "<!-- 7 -->◀️ Revert" },
+]
+# Exclude commits that are not matched by any commit parser.
+filter_commits = true
+# Regex to select git tags that represent releases.
+tag_pattern = "v?[0-9].*"
+```
+
+</details>
 
 ### release-drafter
 
@@ -135,5 +224,3 @@ to update a CHANGELOG.md file with the latest release notes from GitHub.
 [peter-evans/create-pull-request](https://github.com/peter-evans/create-pull-request) is a GitHub action to create a pull
 request for changes you've made to files within your GitHub workflow. The action will create a pull request if one does
 not already exist, or update an existing pull request if it does.
-
-
