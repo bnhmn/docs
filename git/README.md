@@ -12,8 +12,9 @@ See <https://git-scm.com/docs/gittutorial>.
 ## Git Commands
 
 ```text
-Accept my version of a file        git checkout --ours -- <filename>
-Accept their version of a file     git checkout --theirs -- <filename>
+Accept my version of a file during merge      git checkout --ours -- <filename>
+Accept their version of a file during merge   git checkout --theirs -- <filename>
+Delete a file after adding it to .gitignore   git rm --cached */.DS_Store
 ```
 
 ## Git Tooling
