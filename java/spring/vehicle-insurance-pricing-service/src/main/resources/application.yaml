@@ -1,0 +1,15 @@
+spring:
+  datasource:
+    url: jdbc:postgresql://localhost:5439/insurance
+    username: db-user
+    password: db-password
+  jackson:
+    default-property-inclusion: non_null
+  docker:
+    compose:
+      lifecycle-management: start_only
+      skip.in-tests: false
+
+logging:
+  level:
+    de.insurance.vehiclepricing: debug

@@ -1,0 +1,18 @@
+services:
+  postgres:
+    image: postgres:17.6-alpine
+    restart: always
+    # set shared memory limit when using docker compose
+    shm_size: 128mb
+    environment:
+      POSTGRES_DB: insurance
+      POSTGRES_USER: db-user
+      POSTGRES_PASSWORD: db-password
+    volumes:
+      - postgres-storage:/var/lib/postgresql/data
+      - ./postcodes.csv:/data/postcodes.csv:ro
+    ports:
+      - "5439:5432"
+
+volumes:
+  postgres-storage: {}
