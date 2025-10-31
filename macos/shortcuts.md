@@ -47,6 +47,7 @@ Add Cursors in selection             Alt-Shift-G
 Select over multiple lines           Alt -> Move Cursor
 Expand selection to enclosed string  Cmd-W twice
 Open Settings                        Cmd-,
+Duplicate Line                       Cmd-D
 Toggle Line Comment                  Cmd-NUMPADDIVIDE
 Toggle Block Comment                 Cmd-Alt-NUMPADDIVIDE
 Debug                                Shift-F9
