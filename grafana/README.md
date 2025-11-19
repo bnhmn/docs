@@ -63,6 +63,13 @@ sum(kube_deployment_status_replicas_unavailable{namespace="$namespace", deployme
 time() - kube_cronjob_status_last_successful_time{namespace="$namespace", cronjob="$cronjob_name"}
 ```
 
+It makes sense to display elapsed time in a Grafana [Stat panel](https://grafana.com/docs/grafana/latest/panels-visualizations/visualizations/stat/).
+
+When doing so, you should use the **Instant** query mode. Otherwise, the displayed value depends on the selected query
+interval, and changing the interval makes the value jump because the query is evaluated at different step boundaries.
+
+<img src="./instant-query.png" width="400px" alt="Grafana instant query mode">
+
 ### Java Service Uptime in Seconds
 
 ```js
