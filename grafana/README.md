@@ -57,7 +57,13 @@ sum(kube_pod_container_status_running{namespace="$namespace", container="$servic
 sum(kube_deployment_status_replicas_unavailable{namespace="$namespace", deployment="$deployment"})
 ```
 
-### Java Service Uptime
+### Kubernetes Cronjob Seconds Since Last Successful Run
+
+```js
+time() - kube_cronjob_status_last_successful_time{namespace="$namespace", cronjob="$cronjob_name"}
+```
+
+### Java Service Uptime in Seconds
 
 ```js
 min(process_uptime_seconds{kubernetes_namespace="$namespace", name="$service", instance=~"$instance"})
