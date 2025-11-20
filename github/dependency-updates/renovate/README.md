@@ -52,7 +52,7 @@ jobs:
         env:
           # You can find all configuration options here:
           # https://docs.renovatebot.com/self-hosted-configuration
-          LOG_LEVEL: ${{ runner.debug == '1' && 'debug' || 'info' inputs.log_level }}
+          LOG_LEVEL: ${{ runner.debug == '1' && 'debug' || 'info' }}
           RENOVATE_PLATFORM: github
           # The token needs to be able to create pull requests
           # in the target repositories
