@@ -62,6 +62,7 @@ Go To Matching Brace                 Cmd-Shift-M
 Navigate Back / Forward              MOUSE-BACK / MOUSE-FORWARD
 Find Usages                          Alt-F7
 Sort Lines                           Select Lines -> Shift Shift -> "Sort lines"
+..                                   Trigger Command Completion
 ```
 
 ## VSCode
