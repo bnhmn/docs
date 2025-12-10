@@ -72,6 +72,8 @@ interval, and changing the interval makes the value jump because the query is ev
 
 ### Java Service Uptime in Seconds
 
+The Java metrics are provided by [Spring Boot Actuator](https://docs.spring.io/spring-boot/reference/actuator/metrics.html#actuator.metrics.supported).
+
 ```js
 min(process_uptime_seconds{kubernetes_namespace="$namespace", name="$service", instance=~"$instance"})
 ```
@@ -104,4 +106,10 @@ Response time
 sum(increase(http_server_requests_seconds_sum{kubernetes_namespace="$namespace", name="$service", instance=~"$instance", uri=~"$incoming_endpoint", client_name=~"$client_name"}[$__rate_interval]))
 /
 sum(increase(http_server_requests_seconds_count{kubernetes_namespace="$namespace", name="$service", instance=~"$instance", uri=~"$incoming_endpoint", client_name=~"$client_name"}[$__rate_interval]))
+```
+
+### Java SSL Certificate Expiration
+
+```js
+min(ssl_chain_expiry_seconds{kubernetes_namespace="$namespace", name="$service", instance=~"$instance", bundle="clientcert"})
 ```
