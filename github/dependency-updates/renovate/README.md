@@ -6,21 +6,53 @@ You can use [Renovate](https://docs.renovatebot.com/) to automatically update so
 Renovate is an automated tool that scans software repositories for dependencies, checks whether newer versions of those dependencies are available, and then creates pull requests with these updates in the project's codebase.
 Renovate needs to be set up and configured one-time for each repository. During this process, a job must be created in the build system which will run Renovate at regular intervals.
 
-## Execution
+## How to Run
 
-Renovate can be executed either via [Node](https://nodejs.org/en) package manager or [Docker](https://docs.docker.com/get-docker/)
+You can run Renovate either via [Node](https://nodejs.org/en) (preferred):
 
 ```bash
 npx renovate
 ```
 
+or via [Docker](https://docs.docker.com/get-docker/):
+
 ```bash
 docker run renovate/renovate
 ```
 
+## How to Debug
+
+Renovate typically operates on the repository's main branch and retrieves all data via the
+[platform](https://docs.renovatebot.com/modules/platform/)'s API (e.g., GitHub, GitLab, or Bitbucket).
+However, this makes it difficult to test a repository configuration before merging it into the main branch.
+
+However, there are two ways to test a configuration locally:
+
+1. Modify the configuration using [environment variables](https://docs.renovatebot.com/configuration-options/#packagerules):
+
+   ```bash
+   export LOG_LEVEL=DEBUG
+   export RENOVATE_PLATFORM=github
+   export RENOVATE_TOKEN="$GITHUB_TOKEN"
+   export RENOVATE_AUTODISCOVER=true
+   export RENOVATE_PACKAGE_RULES='[]'
+   npx renovate
+   ```
+
+2. Modify the renovate.json configuration file and run Renovate in [local mode](https://docs.renovatebot.com/modules/platform/local/):
+
+   ```bash
+   export LOG_LEVEL=DEBUG
+   export RENOVATE_PLATFORM=local
+   export RENOVATE_GITHUB_COM_TOKEN="$GITHUB_TOKEN"
+   npx renovate
+   ```
+
 ## Configuration
 
-Renovate needs to be configured at two levels: The **repository configuration** and the **bot configuration**.
+Renovate needs to be configured at two levels:
+The [repository configuration](https://docs.renovatebot.com/configuration-options/)
+and the [bot configuration](https://docs.renovatebot.com/self-hosted-configuration/).
 
 ### Repository Configuration
 
@@ -84,7 +116,7 @@ In XML files:
 
 ```xml
 <palantirJavaFormat>
-  <!-- renovate datasource=maven depName=com.palantir.javaformat:palantir-java-format versioning=maven -->
+  <!-- renovate: datasource=maven depName=com.palantir.javaformat:palantir-java-format versioning=maven -->
   <version>2.83.0</version>
   <style>GOOGLE</style>
 </palantirJavaFormat>
