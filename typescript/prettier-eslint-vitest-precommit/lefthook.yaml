@@ -1,0 +1,10 @@
+# https://lefthook.dev
+pre-commit:
+  parallel: true
+  jobs:
+    - name: Format code
+      run: npx prettier --write --ignore-unknown {staged_files}
+      stage_fixed: true
+
+    - name: Execute tests
+      run: npx vitest run

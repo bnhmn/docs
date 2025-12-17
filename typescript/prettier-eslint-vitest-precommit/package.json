@@ -1,0 +1,15 @@
+{
+  "name": "my-npm-project",
+  "type": "module",
+  "private": true,
+  "scripts": {
+    "check:format": "prettier --check .",
+    "test": "vitest"
+  },
+  "devDependencies": {
+    "lefthook": "^2.0.12",
+    "prettier": "^3.7.4",
+    "prettier-plugin-sort-json": "^4.1.1",
+    "vitest": "^4.0.15"
+  }
+}

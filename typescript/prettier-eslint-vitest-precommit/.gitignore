@@ -1,0 +1,17 @@
+# IDE
+
+.idea/
+.vscode/
+*.iml
+*.ipr
+*.iws
+.DS_Store
+
+# Build
+
+target/
+out/
+__pycache__/
+venv/
+node_modules/
+*.log
