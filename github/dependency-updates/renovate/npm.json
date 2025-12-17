@@ -1,0 +1,32 @@
+{
+  "$schema": "https://docs.renovatebot.com/renovate-schema.json",
+  "description": "Rules for the npm manager. See https://docs.renovatebot.com/configuration-options for available options",
+  "packageRules": [
+    {
+      "matchManagers": ["npm"],
+      "description": "Only suggest dependency versions that are older than 7 days for security reasons",
+      "minimumReleaseAge": "7 days",
+      "internalChecksFilter": "strict"
+    },
+    {
+      "matchManagers": ["npm"],
+      "matchUpdateTypes": ["minor", "patch"],
+      "description": "Enable auto-merge for all non-major dependency updates",
+      "automerge": true
+    },
+    {
+      "matchManagers": ["npm"],
+      "matchUpdateTypes": ["minor", "patch"],
+      "matchDepTypes": ["dependencies"],
+      "description": "Add all non-major runtime dependency updates to 'minor runtime dependencies' group",
+      "groupName": "minor runtime dependencies"
+    },
+    {
+      "matchManagers": ["npm"],
+      "matchUpdateTypes": ["minor", "patch"],
+      "matchDepTypes": ["devDependencies"],
+      "description": "Add all non-major develop dependency updates to 'minor develop dependencies' group",
+      "groupName": "minor develop dependencies"
+    }
+  ]
+}

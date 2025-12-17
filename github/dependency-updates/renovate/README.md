@@ -20,7 +20,78 @@ docker run renovate/renovate
 
 ## Configuration
 
-Renovate needs to be configured at two levels: The **Renovate bot configuration** and the **repository configuration**.
+Renovate needs to be configured at two levels: The **repository configuration** and the **bot configuration**.
+
+### Repository Configuration
+
+The repository configuration is located in the software repository, whose dependencies are being tracked,
+and it solely concerns this repository. There, for example, the granularity of the pull requests can be adjusted.
+The repository can be configured via a [renovate.json](https://docs.renovatebot.com/configuration-options/) file:
+
+```json
+{
+  "$schema": "https://docs.renovatebot.com/renovate-schema.json",
+  "description": "See https://docs.renovatebot.com/configuration-options for available options",
+  "ignorePaths": [
+    ".github/workflows/**"
+  ]
+}
+```
+
+It's possible to store reusable configuration snippets like these in a central repository:
+
+* [default](default.json)
+* [maven](maven.json)
+* [npm](npm.json)
+* [regex](regex.json)
+* [release-notes](release-notes.json)
+
+For example, if you want to activate the `renovate/default.json` snippet from repository `my-github-org/my-repo`, you can do so using the extends directive:
+
+```json
+{
+  "$schema": "https://docs.renovatebot.com/renovate-schema.json",
+  "description": "See https://docs.renovatebot.com/configuration-options for available options",
+  "extends": [
+    "github>my-github-org/my-repo//renovate/default"
+  ],
+  "ignorePaths": [
+    ".github/workflows/**"
+  ]
+}
+```
+
+### Manage Dependencies in Text Files
+
+Renovate automatically detects dependencies from [common package managers](https://docs.renovatebot.com/modules/manager/)
+such as Maven, Gradle, npm and pip.
+
+If you want to track dependencies that are not in a format that is supported out of the box, or if you need more
+flexibility, you can use so-called [custom regex managers](https://docs.renovatebot.com/modules/manager/regex/).
+They allow you to track and update dependencies in any text file using Renovate.
+
+When using [this regex manager](regex.json), you simply need to add a dependency directive comment above the line
+containing the current version number:
+
+In shell scripts and YAML files:
+
+```bash
+# renovate: datasource=maven depName=org.sonarsource.scanner.maven:sonar-maven-plugin versioning=maven
+mvn org.sonarsource.scanner.maven:sonar-maven-plugin:5.5.0.6356:sonar
+```
+
+In XML files:
+
+```xml
+<palantirJavaFormat>
+  <!-- renovate datasource=maven depName=com.palantir.javaformat:palantir-java-format versioning=maven -->
+  <version>2.83.0</version>
+  <style>GOOGLE</style>
+</palantirJavaFormat>
+```
+
+For more information, see supported [data sources](https://docs.renovatebot.com/modules/datasource/) and
+[versionings](https://docs.renovatebot.com/modules/versioning/).
 
 ### Bot Configuration
 
@@ -95,41 +166,4 @@ RENOVATE_AUTODISCOVER_FILTER="MYPROJECT/my-repository"
 RENOVATE_HOST_RULES='[{"hostType":"maven","matchHost":"artifactory.example.com","username":"<ARTIFACTORY-USERNAME>","password":"<ARTIFACTORY-PASSWORD>"}]'
 RENOVATE_PACKAGE_RULES='<SEE GITHUB SETUP>'
 GITHUB_COM_TOKEN="<ACCESS-TOKEN-TO-READ-CHANGELOGS-FROM-GITHUB>"
-```
-
-### Repository config
-
-The repository configuration is located in the software repository, whose dependencies are being tracked,
-and it solely concerns this repository. There, for example, the granularity of the pull requests can be adjusted.
-The repository can be configured via a [renovate.json](https://docs.renovatebot.com/configuration-options/) file:
-
-```json
-{
-  "$schema": "https://docs.renovatebot.com/renovate-schema.json",
-  "description": "See https://docs.renovatebot.com/configuration-options for available options",
-  "extends": [
-    "github>my-github-org/actions//renovate/default"
-  ],
-  "ignorePaths": [
-    ".github/workflows/**"
-  ]
-}
-```
-
-File `renovate/default.json` in repository `my-github-org/actions`:
-
-```json
-{
-  "$schema": "https://docs.renovatebot.com/renovate-schema.json",
-  "description": "See https://docs.renovatebot.com/configuration-options for available options",
-  "extends": [
-    "config:best-practices",
-    ":disableDependencyDashboard",
-    "mergeConfidence:all-badges"
-  ],
-  "minimumReleaseAge": "7 days",
-  "internalChecksFilter": "strict",
-  "packageRules": [
-  ]
-}
 ```

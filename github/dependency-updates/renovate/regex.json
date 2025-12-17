@@ -1,0 +1,24 @@
+{
+  "$schema": "https://docs.renovatebot.com/renovate-schema.json",
+  "description": "Custom regex managers allow you to perform version updates in any text file using Renovate. You simply need to add a dependency directive comment above the line containing the version number. See https://docs.renovatebot.com/modules/manager/regex/",
+  "customManagers": [
+    {
+      "customType": "regex",
+      "managerFilePatterns": ["**/*.sh", "**/*.yaml", "**/*.yml"],
+      "description": "# renovate: datasource=github-tags depName=githubOrg/repoName versioning=semver-coerced",
+      "matchStrings": [
+        "# renovate: datasource=(?<datasource>.+?) depName=(?<depName>.+?)( versioning=(?<versioning>.+?))?\\s*\\n[A-Za-z0-9:/?&%._# -]+?(?<currentValue>\\d+(\\.\\d+)+)"
+      ],
+      "versioningTemplate": "{{#if versioning}}{{{versioning}}}{{else}}semver-coerced{{/if}}"
+    },
+    {
+      "customType": "regex",
+      "managerFilePatterns": ["**/*.xml"],
+      "description": "<!-- renovate: datasource=maven depName=com.group.id:artifact.id versioning=maven -->",
+      "matchStrings": [
+        "<!-- renovate: datasource=(?<datasource>.+?) depName=(?<depName>.+?)( versioning=(?<versioning>.+?))?\\s*-->\\s*\\n[A-Za-z0-9:/?&%._# -<>]+?(?<currentValue>\\d+(\\.\\d+)+)"
+      ],
+      "versioningTemplate": "{{#if versioning}}{{{versioning}}}{{else}}semver-coerced{{/if}}"
+    }
+  ]
+}

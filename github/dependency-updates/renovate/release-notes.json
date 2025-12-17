@@ -1,0 +1,31 @@
+{
+  "$schema": "https://docs.renovatebot.com/renovate-schema.json",
+  "description": "Configures the changelog URLs for packages that do not yet support automatic changelog retrieval. See https://docs.renovatebot.com/modules/datasource/maven/#making-your-changelogs-fetchable and https://docs.renovatebot.com/configuration-options/#changelogurl",
+  "packageRules": [
+    {
+      "matchManagers": ["maven"],
+      "matchPackageNames": ["org.apache.commons:commons-lang3"],
+      "changelogUrl": "https://commons.apache.org/proper/commons-lang/changes.html"
+    },
+    {
+      "matchManagers": ["maven"],
+      "matchPackageNames": ["org.apache.maven.plugins:maven-antrun-plugin"],
+      "changelogUrl": "https://github.com/apache/maven-antrun-plugin"
+    },
+    {
+      "matchManagers": ["maven"],
+      "matchPackageNames": ["org.apache.maven.plugins:maven-jar-plugin"],
+      "changelogUrl": "https://github.com/apache/maven-jar-plugin"
+    },
+    {
+      "matchManagers": ["maven"],
+      "matchPackageNames": ["org.junit:junit-bom"],
+      "changelogUrl": "https://github.com/junit-team/junit-framework"
+    },
+    {
+      "matchManagers": ["maven"],
+      "matchPackageNames": ["software.amazon.awssdk:bom"],
+      "changelogUrl": "https://github.com/aws/aws-sdk-java-v2"
+    }
+  ]
+}

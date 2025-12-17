@@ -1,0 +1,17 @@
+{
+  "$schema": "https://docs.renovatebot.com/renovate-schema.json",
+  "description": "See https://docs.renovatebot.com/configuration-options for available options",
+  "extends": [
+    "config:best-practices",
+    ":semanticCommitTypeAll(chore)",
+    ":disableDependencyDashboard",
+    "github>my-github-org/my-repo//renovate/maven",
+    "github>my-github-org/my-repo//renovate/npm",
+    "github>my-github-org/my-repo//renovate/regex",
+    "github>my-github-org/my-repo//renovate/release-notes"
+  ],
+  "ignorePresets": [
+    "group:monorepos",
+    "group:recommended"
+  ]
+}

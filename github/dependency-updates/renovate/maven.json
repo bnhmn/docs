@@ -1,0 +1,56 @@
+{
+  "$schema": "https://docs.renovatebot.com/renovate-schema.json",
+  "description": "Rules for the maven manager. See https://docs.renovatebot.com/configuration-options for available options",
+  "packageRules": [
+    {
+      "matchManagers": ["maven"],
+      "description": "Show only the artifactId in the title of single-dependency pull requests: 'update junit-jupiter-api to v6' instead of 'update dependency org.junit.jupiter:junit-jupiter-api to v6'",
+      "commitMessageTopic": "{{ lookup (split depName ':') 1 }}",
+      "prTitleStrict": true
+    },
+    {
+      "matchManagers": ["maven"],
+      "description": "Only suggest dependency versions that are older than 7 days for security reasons",
+      "minimumReleaseAge": "7 days",
+      "internalChecksFilter": "strict"
+    },
+    {
+      "matchManagers": ["maven"],
+      "matchUpdateTypes": ["minor", "patch"],
+      "description": "Enable auto-merge for all non-major dependency updates",
+      "automerge": true
+    },
+    {
+      "matchManagers": ["maven"],
+      "matchUpdateTypes": ["minor", "patch"],
+      "description": "Add all non-major dependency updates that don't match a more specific rule below to 'minor runtime dependencies' group",
+      "groupName": "minor runtime dependencies"
+    },
+    {
+      "matchManagers": ["maven"],
+      "matchUpdateTypes": ["minor", "patch"],
+      "matchDepTypes": ["test"],
+      "description": "Add all non-major test dependency updates to 'minor develop dependencies' group",
+      "groupName": "minor develop dependencies"
+    },
+    {
+      "matchManagers": ["maven"],
+      "matchUpdateTypes": ["minor", "patch"],
+      "matchPackageNames": [
+        "*:maven-*-plugin",
+        "*:*-maven-plugin",
+        "org.mapstruct:*",
+        "org.projectlombok:*",
+        "org.owasp:dependency-check-maven"
+      ],
+      "description": "Add all non-major build dependency updates to 'minor develop dependencies' group",
+      "groupName": "minor develop dependencies"
+    },
+    {
+      "matchManagers": ["maven"],
+      "matchPackageNames": ["com.example.internal.library:*"],
+      "description": "Suppress the minimum release age for internal libraries",
+      "minimumReleaseAge": "0 days"
+    }
+  ]
+}
