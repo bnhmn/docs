@@ -63,8 +63,7 @@ sum(kube_deployment_status_replicas_unavailable{namespace="$namespace", deployme
 time() - kube_cronjob_status_last_successful_time{namespace="$namespace", cronjob="$cronjob_name"}
 ```
 
-It makes sense to display elapsed time in a Grafana [Stat panel](https://grafana.com/docs/grafana/latest/panels-visualizations/visualizations/stat/).
-
+When displaying elapsed time, it makes sense to use a Grafana [Stat panel](https://grafana.com/docs/grafana/latest/panels-visualizations/visualizations/stat/).
 When doing so, you should use the **Instant** query mode. Otherwise, the displayed value depends on the selected query
 interval, and changing the interval makes the value jump because the query is evaluated at different step boundaries.
 
@@ -100,13 +99,27 @@ Outgoing Requests
 sum by (outcome) (increase(http_client_requests_seconds_count{kubernetes_namespace="$namespace", name="$service", instance=~"$instance", uri=~"$outgoing_endpoint"}[$__rate_interval]))
 ```
 
-Response time
+Average Response Time
 
 ```js
 sum(increase(http_server_requests_seconds_sum{kubernetes_namespace="$namespace", name="$service", instance=~"$instance", uri=~"$incoming_endpoint", client_name=~"$client_name"}[$__rate_interval]))
 /
 sum(increase(http_server_requests_seconds_count{kubernetes_namespace="$namespace", name="$service", instance=~"$instance", uri=~"$incoming_endpoint", client_name=~"$client_name"}[$__rate_interval]))
 ```
+
+Response Time Percentiles
+
+In addition to the average response time, you can also [track percentiles](https://docs.spring.io/spring-boot/reference/actuator/metrics.html#actuator.metrics.customizing.per-meter-properties)
+such as the p95 percentile.
+
+```js
+histogram_quantile(
+  0.95,
+  sum(rate(http_server_requests_seconds_bucket{kubernetes_namespace="$namespace", name="$service", instance=~"$instance"}[$__rate_interval])) by (le)
+)
+```
+
+Note that enabling `percentiles-histograms` may cause the system to generate a very high number of time series, because there are many tag combinations.
 
 ### Java SSL Certificate Expiration
 
