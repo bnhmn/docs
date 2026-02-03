@@ -27,6 +27,15 @@ mvn dependency:tree -Dverbose | grep spring-boot-starter-webflux -A 10 -B 20
 Note that a Maven project pom can override the scope of a transitive dependency brought in from a library, leading to
 issues. The report above will show this.
 
+## Maven Multi-Module Projects
+
+In a multi-module Maven project, you can use the `-pl my-maven-module` option to run a Maven command for selected
+modules only:
+
+```bash
+mvn dependency:tree -pl my-maven-module -Dverbose
+```
+
 ## Show Effective POM (parent pom + project pom)
 
 ```bash
