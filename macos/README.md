@@ -32,7 +32,7 @@ See [shortcuts.md](shortcuts.md).
 * htop
 * gettext
 * watch
-* colima (Docker daemon)
+* colima (Docker daemon) - `brew install colima` - `brew services start colima`
 * ccat (colorized cat)
 * sevenzip
 * z (warp into directory)
