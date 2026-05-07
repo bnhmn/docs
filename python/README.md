@@ -18,6 +18,14 @@ automation, and more, making it a versatile tool favored by both beginners and e
 python -m site
 ```
 
+## Debug pip config
+
+The [pip configuration](https://pip.pypa.io/en/stable/topics/configuration/) file is usually located at `~/.config/pip/pip.conf`.
+
+```
+pip config list
+```
+
 ## Show Platform Infos
 
 ```bash
