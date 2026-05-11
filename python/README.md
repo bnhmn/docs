@@ -24,6 +24,7 @@ The [pip configuration](https://pip.pypa.io/en/stable/topics/configuration/) fil
 
 ```
 pip config list
+pip config debug
 ```
 
 ## Show Platform Infos
