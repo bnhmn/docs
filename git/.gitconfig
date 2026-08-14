@@ -1,5 +1,6 @@
 [user]
   name = John Doe
+  email = john.doe@gmail.com
 [core]
   autocrlf = input  # Convert Windows line endings \r\n to Unix line endings \n on commit
 [fetch]
