@@ -20,6 +20,17 @@ alias "gp=git push origin"
 alias "gs=git status"
 alias "reset=source ~/.zshrc"
 
+# Git prune all branches that have been deleted from the remote
+unalias gpr
+function gpr() {
+  git checkout main 2>/dev/null || git checkout master 2>/dev/null || true
+  git pull -p
+  for branch in $(git for-each-ref --format '%(refname) %(upstream:track)' refs/heads | awk '$2 == "[gone]" {sub("refs/heads/", "", $1); print $1}')
+  do
+    git branch -D "$branch"
+  done
+}
+
 # Auto active python venv on cd into directory
 function python_venv() {
   MYVENV=./venv
