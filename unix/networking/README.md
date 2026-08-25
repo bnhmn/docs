@@ -1,6 +1,6 @@
 # Networking
 
-# Check Connectivity Between Devices in the Cloud
+## Check Connectivity Between Devices in the Cloud
 
 These commands help diagnose network connectivity between cloud VMs, databases, and other devices. 
 They check basic host reachability and access to a specific TCP port.
