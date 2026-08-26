@@ -4,6 +4,19 @@
 It is commonly used for making requests to web services, downloading files, and testing APIs. It is widely
 used for scripting because of its flexibility and ease of use.
 
+## Testing Connectivity
+
+This command suppresses the response body and prints only the HTTP status code. It is useful for quick connectivity
+and health checks in scripts to verify if a server is reachable and if your credentials are valid:
+
+```bash
+curl -s -o /dev/null -w "%{http_code}\n" https://example.com
+```
+
+```bash
+curl -s -o /dev/null -w "%{http_code}\n" -u "$NEXUS_USERNAME:$NEXUS_PASSWORD" https://nexusrepository.example.com/repository/maven-public/
+```
+
 ## Safe Curl Command
 
 A curl command with default configuration:
