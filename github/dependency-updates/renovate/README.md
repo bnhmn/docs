@@ -8,7 +8,7 @@ Renovate needs to be set up and configured one-time for each repository. During 
 
 ## How to Run
 
-You can run Renovate either via [Node](https://nodejs.org/en) (preferred):
+You can run Renovate either via [Node](https://nodejs.org/en)
 
 ```bash
 npx renovate
@@ -19,34 +19,6 @@ or via [Docker](https://docs.docker.com/get-docker/):
 ```bash
 docker run renovate/renovate
 ```
-
-## How to Debug
-
-Renovate typically operates on the repository's main branch and retrieves all data via the
-[platform](https://docs.renovatebot.com/modules/platform/)'s API (e.g., GitHub, GitLab, or Bitbucket).
-However, this makes it difficult to test a repository configuration before merging it into the main branch.
-
-However, there are two ways to test a configuration locally:
-
-1. Modify the configuration using [environment variables](https://docs.renovatebot.com/configuration-options/#packagerules):
-
-   ```bash
-   export LOG_LEVEL=DEBUG
-   export RENOVATE_PLATFORM=github
-   export RENOVATE_TOKEN="$GITHUB_TOKEN"
-   export RENOVATE_AUTODISCOVER=true
-   export RENOVATE_PACKAGE_RULES='[]'
-   npx renovate
-   ```
-
-2. Modify the renovate.json configuration file and run Renovate in [local mode](https://docs.renovatebot.com/modules/platform/local/):
-
-   ```bash
-   export LOG_LEVEL=DEBUG
-   export RENOVATE_PLATFORM=local
-   export RENOVATE_GITHUB_COM_TOKEN="$GITHUB_TOKEN"
-   npx renovate
-   ```
 
 ## Configuration
 
@@ -69,61 +41,6 @@ The repository can be configured via a [renovate.json](https://docs.renovatebot.
   ]
 }
 ```
-
-It's possible to store reusable configuration snippets like these in a central repository:
-
-* [default](default.json)
-* [maven](maven.json)
-* [npm](npm.json)
-* [regex](regex.json)
-* [release-notes](release-notes.json)
-
-For example, if you want to activate the `renovate/default.json` snippet from repository `my-github-org/my-repo`, you can do so using the extends directive:
-
-```json
-{
-  "$schema": "https://docs.renovatebot.com/renovate-schema.json",
-  "description": "See https://docs.renovatebot.com/configuration-options for available options",
-  "extends": [
-    "github>my-github-org/my-repo//renovate/default"
-  ],
-  "ignorePaths": [
-    ".github/workflows/**"
-  ]
-}
-```
-
-### Manage Dependencies in Text Files
-
-Renovate automatically detects dependencies from [common package managers](https://docs.renovatebot.com/modules/manager/)
-such as Maven, Gradle, npm and pip.
-
-If you want to track dependencies that are not in a format that is supported out of the box, or if you need more
-flexibility, you can use so-called [custom regex managers](https://docs.renovatebot.com/modules/manager/regex/).
-They allow you to track and update dependencies in any text file using Renovate.
-
-When using [this regex manager](regex.json), you simply need to add a dependency directive comment above the line
-containing the current version number:
-
-In shell scripts and YAML files:
-
-```bash
-# renovate: datasource=maven depName=org.sonarsource.scanner.maven:sonar-maven-plugin versioning=maven
-mvn org.sonarsource.scanner.maven:sonar-maven-plugin:5.5.0.6356:sonar
-```
-
-In XML files:
-
-```xml
-<palantirJavaFormat>
-  <!-- renovate: datasource=maven depName=com.palantir.javaformat:palantir-java-format versioning=maven -->
-  <version>2.83.0</version>
-  <style>GOOGLE</style>
-</palantirJavaFormat>
-```
-
-For more information, see supported [data sources](https://docs.renovatebot.com/modules/datasource/) and
-[versionings](https://docs.renovatebot.com/modules/versioning/).
 
 ### Bot Configuration
 
@@ -199,3 +116,91 @@ RENOVATE_HOST_RULES='[{"hostType":"maven","matchHost":"artifactory.example.com",
 RENOVATE_PACKAGE_RULES='<SEE GITHUB SETUP>'
 GITHUB_COM_TOKEN="<ACCESS-TOKEN-TO-READ-CHANGELOGS-FROM-GITHUB>"
 ```
+
+## More Information
+
+### How to Debug
+
+Renovate typically operates on the repository's main branch and retrieves all data via the
+[platform](https://docs.renovatebot.com/modules/platform/)'s API (e.g., GitHub, GitLab, or Bitbucket).
+However, this makes it difficult to test a repository configuration before merging it into the main branch.
+
+However, there are two ways to test a configuration locally:
+
+1. Modify the configuration using [environment variables](https://docs.renovatebot.com/configuration-options/#packagerules):
+
+   ```bash
+   export LOG_LEVEL=DEBUG
+   export RENOVATE_PLATFORM=github
+   export RENOVATE_TOKEN="$GITHUB_TOKEN"
+   export RENOVATE_AUTODISCOVER=true
+   export RENOVATE_PACKAGE_RULES='[]'
+   npx renovate
+   ```
+
+2. Modify the renovate.json configuration file and run Renovate in [local mode](https://docs.renovatebot.com/modules/platform/local/):
+
+   ```bash
+   export LOG_LEVEL=DEBUG
+   export RENOVATE_PLATFORM=local
+   export RENOVATE_GITHUB_COM_TOKEN="$GITHUB_TOKEN"
+   npx renovate
+   ```
+
+### Reuse Configuration Snippets
+
+It's possible to store [reusable configuration snippets](https://docs.renovatebot.com/config-presets/) like these in a central repository:
+
+* [default](default.json)
+* [maven](maven.json)
+* [npm](npm.json)
+* [regex](regex.json)
+* [release-notes](release-notes.json)
+
+For example, if you want to activate the `renovate/default.json` snippet from repository `my-github-org/my-repo`, you can do so using the extends directive:
+
+```json
+{
+  "$schema": "https://docs.renovatebot.com/renovate-schema.json",
+  "description": "See https://docs.renovatebot.com/configuration-options for available options",
+  "extends": [
+    "github>my-github-org/my-repo//renovate/default"
+  ],
+  "ignorePaths": [
+    ".github/workflows/**"
+  ]
+}
+```
+
+### Manage Dependencies in Text Files
+
+Renovate automatically detects dependencies from [common package managers](https://docs.renovatebot.com/modules/manager/)
+such as Maven, Gradle, npm and pip.
+
+If you want to track dependencies that are not in a format that is supported out of the box, or if you need more
+flexibility, you can use so-called [custom regex managers](https://docs.renovatebot.com/modules/manager/regex/).
+They allow you to track and update dependencies in any text file using Renovate.
+
+When using [this regex manager](regex.json), you simply need to add a dependency directive comment above the line
+containing the current version number:
+
+In shell scripts and YAML files:
+
+```bash
+# renovate: datasource=maven depName=org.sonarsource.scanner.maven:sonar-maven-plugin versioning=maven
+mvn org.sonarsource.scanner.maven:sonar-maven-plugin:5.5.0.6356:sonar
+```
+
+In XML files:
+
+```xml
+<palantirJavaFormat>
+  <!-- renovate: datasource=maven depName=com.palantir.javaformat:palantir-java-format versioning=maven -->
+  <version>2.83.0</version>
+  <style>GOOGLE</style>
+</palantirJavaFormat>
+```
+
+For more information, see supported [data sources](https://docs.renovatebot.com/modules/datasource/) and
+[versionings](https://docs.renovatebot.com/modules/versioning/).
+
