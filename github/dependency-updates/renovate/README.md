@@ -127,25 +127,23 @@ docker run renovate/renovate
 
 ### How to Debug
 
-Renovate typically operates on the repository's main branch and retrieves all data via the
-[platform](https://docs.renovatebot.com/modules/platform/)'s API (e.g., GitHub, GitLab, or Bitbucket).
-However, this makes it difficult to test a repository configuration before merging it into the main branch.
+> [!IMPORTANT]
+> Renovate typically operates on the repository's **default branch** and retrieves all data via the
+> [platform](https://docs.renovatebot.com/modules/platform/)'s API (e.g., GitHub, GitLab, or Bitbucket).
+> However, this makes it difficult to test configuration options, since there is no way to make Renovate
+> read the **repository configuration** from a feature branch instead of the main branch.
 
-However, there are two ways to test a configuration locally:
+However, if you want to test configuration options without merging to main, there are two options:
 
-1. Modify the configuration using [environment variables](https://docs.renovatebot.com/configuration-options/#packagerules):
+1. Add additional [environment variables](https://docs.renovatebot.com/configuration-options/#packagerules) to your Bot configuration:
 
    ```bash
    export LOG_LEVEL=DEBUG
-   export RENOVATE_PLATFORM=github
-   export RENOVATE_TOKEN="$GITHUB_TOKEN"
-   export RENOVATE_AUTODISCOVER=true
-   export RENOVATE_BASE_BRANCH_PATTERNS='["main"]'
    export RENOVATE_PACKAGE_RULES='[]'
    npx renovate
    ```
 
-2. Modify the renovate.json configuration file and run Renovate in [local mode](https://docs.renovatebot.com/modules/platform/local/):
+2. Modify the renovate.json configuration file locally and run Renovate in [local mode](https://docs.renovatebot.com/modules/platform/local/):
 
    ```bash
    export LOG_LEVEL=DEBUG
