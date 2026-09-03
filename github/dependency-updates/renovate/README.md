@@ -104,17 +104,23 @@ jobs:
 #### Bitbucket
 
 ```bash
-LOG_LEVEL="info"
-RENOVATE_PLATFORM="bitbucket-server"
-RENOVATE_ENDPOINT="https://example.com/stash"
-RENOVATE_GIT_FS="http"
-RENOVATE_USERNAME="<BITBUCKET-USERNAME>"
-RENOVATE_PASSWORD="<BITBUCKET-PASSWORD>"
-RENOVATE_AUTODISCOVER=true
-RENOVATE_AUTODISCOVER_FILTER="MYPROJECT/my-repository"
-RENOVATE_HOST_RULES='[{"hostType":"maven","matchHost":"artifactory.example.com","username":"<ARTIFACTORY-USERNAME>","password":"<ARTIFACTORY-PASSWORD>"}]'
-RENOVATE_PACKAGE_RULES='<SEE GITHUB SETUP>'
-GITHUB_COM_TOKEN="<ACCESS-TOKEN-TO-READ-CHANGELOGS-FROM-GITHUB>"
+
+# These two variables are only necessary if the Bitbucket TLS certificate was issued by a private certificate authority
+export NODE_EXTRA_CA_CERTS="/certificates/custom-root-ca-pem.crt"
+export GIT_SSL_CAINFO="/certificates/custom-root-ca-pem.crt"
+export LOG_LEVEL="info"
+export RENOVATE_PLATFORM="bitbucket-server"
+export RENOVATE_ENDPOINT="https://example.com/stash"
+export RENOVATE_GIT_FS="http"
+export RENOVATE_USERNAME="<BITBUCKET-USERNAME>"
+export RENOVATE_PASSWORD="<BITBUCKET-PASSWORD>"
+export RENOVATE_AUTODISCOVER=true
+export RENOVATE_AUTODISCOVER_FILTER="MYPROJECT/my-repository"
+export RENOVATE_ASSIGNEES_FROM_CODE_OWNERS=true
+export RENOVATE_HOST_RULES='[{"hostType":"maven","matchHost":"artifactory.example.com","username":"<ARTIFACTORY-USERNAME>","password":"<ARTIFACTORY-PASSWORD>"}]'
+export RENOVATE_PACKAGE_RULES='<SEE GITHUB SETUP>'
+export GITHUB_COM_TOKEN="<ACCESS-TOKEN-TO-READ-CHANGELOGS-FROM-GITHUB>"
+docker run renovate/renovate
 ```
 
 ## More Information
@@ -134,6 +140,7 @@ However, there are two ways to test a configuration locally:
    export RENOVATE_PLATFORM=github
    export RENOVATE_TOKEN="$GITHUB_TOKEN"
    export RENOVATE_AUTODISCOVER=true
+   export RENOVATE_BASE_BRANCH_PATTERNS='["main"]'
    export RENOVATE_PACKAGE_RULES='[]'
    npx renovate
    ```
