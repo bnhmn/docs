@@ -117,8 +117,8 @@ export RENOVATE_PASSWORD="<BITBUCKET-PASSWORD>"
 export RENOVATE_AUTODISCOVER=true
 export RENOVATE_AUTODISCOVER_FILTER="MYPROJECT/my-repository"
 export RENOVATE_ASSIGNEES_FROM_CODE_OWNERS=true
-export RENOVATE_HOST_RULES='[{"hostType":"maven","matchHost":"artifactory.example.com","username":"<ARTIFACTORY-USERNAME>","password":"<ARTIFACTORY-PASSWORD>"}]'
-export RENOVATE_PACKAGE_RULES='<SEE GITHUB SETUP>'
+export RENOVATE_HOST_RULES='[{"hostType":"maven","matchHost":"artifactory.example.com","username":"'$ARTIFACTORY_USERNAME'","password":"'$ARTIFACTORY_PASSWORD'"}]'
+export RENOVATE_PACKAGE_RULES='[{"matchManagers":["maven"],"matchPackageNames":["com.example.*"],"registryUrls":["https://artifactory.example.com/maven"]}]'
 export GITHUB_COM_TOKEN="<ACCESS-TOKEN-TO-READ-CHANGELOGS-FROM-GITHUB>"
 docker run renovate/renovate
 ```
