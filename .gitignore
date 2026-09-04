@@ -1,4 +1,6 @@
-.idea
+.idea/*
+!.idea/jsonSchemas
+!.idea/jsonSchemas.xml
 *.iml
 target
 out
