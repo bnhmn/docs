@@ -166,6 +166,7 @@ It's possible to store [reusable configuration snippets](https://docs.renovatebo
 * [npm](npm.json)
 * [regex](regex.json)
 * [release-notes](release-notes.json)
+* [standalone](standalone.json)
 
 For example, if you want to activate the `renovate/default.json` snippet from repository `my-github-org/my-repo`, you can do so using the extends directive:
 
