@@ -12,6 +12,7 @@
   ],
   "ignorePresets": [
     "group:monorepos",
-    "group:recommended"
+    "group:recommended",
+    "docker:pinDigests"
   ]
 }

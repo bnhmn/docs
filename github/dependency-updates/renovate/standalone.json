@@ -1,0 +1,54 @@
+{
+  "$schema": "https://docs.renovatebot.com/renovate-schema.json",
+  "description": "See https://docs.renovatebot.com/configuration-options for available options",
+  "extends": [
+    "config:best-practices",
+    ":semanticCommitTypeAll(chore)",
+    ":disableDependencyDashboard"
+  ],
+  "ignorePresets": ["docker:pinDigests"],
+  "packageRules": [
+    {
+      "matchUpdateTypes": ["minor", "patch"],
+      "description": "Enable auto-merge for all non-major dependency updates",
+      "automerge": true
+    },
+    {
+      "matchManagers": ["*"],
+      "description": "Only suggest dependency versions that are older than 7 days for security reasons",
+      "minimumReleaseAge": "7 days",
+      "internalChecksFilter": "strict"
+    },
+    {
+      "matchPackageNames": ["com.example.internal.library:*"],
+      "description": "Suppress the minimum release age for internal libraries",
+      "minimumReleaseAge": "0 days"
+    },
+    {
+      "matchManagers": ["maven"],
+      "description": "Show only the artifactId in the title of single-dependency pull requests: 'Update junit-jupiter-api to v6' instead of 'Update dependency org.junit.jupiter:junit-jupiter-api to v6'",
+      "commitMessageTopic": "{{ lookup (split depName ':') 1 }}",
+      "prTitleStrict": true
+    }
+  ],
+  "customManagers": [
+    {
+      "customType": "regex",
+      "managerFilePatterns": ["**/*.sh", "**/*.yaml", "**/*.yml"],
+      "description": "Custom regex managers allow you to perform version updates in any text file using Renovate. You simply need to add a dependency directive comment above the line: # renovate: datasource=github-tags depName=githubOrg/repoName versioning=semver-coerced",
+      "matchStrings": [
+        "# renovate: datasource=(?<datasource>.+?) depName=(?<depName>.+?)( versioning=(?<versioning>.+?))?\\s*\\n[A-Za-z0-9:/?&%._# -]+?(?<currentValue>\\d+(\\.\\d+)+)"
+      ],
+      "versioningTemplate": "{{#if versioning}}{{{versioning}}}{{else}}semver-coerced{{/if}}"
+    },
+    {
+      "customType": "regex",
+      "managerFilePatterns": ["**/*.xml"],
+      "description": "Custom regex managers allow you to perform version updates in any text file using Renovate. You simply need to add a dependency directive comment above the line: <!-- renovate: datasource=maven depName=com.palantir.javaformat:palantir-java-format versioning=maven -->",
+      "matchStrings": [
+        "<!-- renovate: datasource=(?<datasource>.+?) depName=(?<depName>.+?)( versioning=(?<versioning>.+?))?\\s*-->\\s*\\n[A-Za-z0-9:/?&%._# -<>]+?(?<currentValue>\\d+(\\.\\d+)+)"
+      ],
+      "versioningTemplate": "{{#if versioning}}{{{versioning}}}{{else}}semver-coerced{{/if}}"
+    }
+  ]
+}

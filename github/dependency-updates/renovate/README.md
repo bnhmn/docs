@@ -116,10 +116,15 @@ export RENOVATE_USERNAME="<BITBUCKET-USERNAME>"
 export RENOVATE_PASSWORD="<BITBUCKET-PASSWORD>"
 export RENOVATE_AUTODISCOVER=true
 export RENOVATE_AUTODISCOVER_FILTER="MYPROJECT/my-repository"
-export RENOVATE_ASSIGNEES_FROM_CODE_OWNERS=true
-export RENOVATE_HOST_RULES='[{"hostType":"maven","matchHost":"artifactory.example.com","username":"'$ARTIFACTORY_USERNAME'","password":"'$ARTIFACTORY_PASSWORD'"}]'
-export RENOVATE_PACKAGE_RULES='[{"matchManagers":["maven"],"matchPackageNames":["com.example.*"],"registryUrls":["https://artifactory.example.com/maven"]}]'
+export RENOVATE_HOST_RULES='[{"hostType":"maven","matchHost":"artifactory.example.com","username":"'$ARTIFACTORY_USERNAME'","password":"'$ARTIFACTORY_PASSWORD'"},{"matchHost":"docker.io","enabled":false}]'
+export RENOVATE_PACKAGE_RULES='[{"matchDatasources":["maven"],"matchPackageNames":["com.example.*"],"registryUrls":["https://artifactory.example.com/maven"]}]'
 export GITHUB_COM_TOKEN="<ACCESS-TOKEN-TO-READ-CHANGELOGS-FROM-GITHUB>"
+# This automatically assigns the reviewers from the CODEOWNERS file. Note that Renovate only does this
+# if auto-merge is disabled. Otherwise, it never assigns reviewers, in order to avoid noise.
+export RENOVATE_REVIEWERS_FROM_CODE_OWNERS=true
+# Note that this only allows you to change the branch where the dependencies are updated.
+# Unfortunately, the renovate.json file is always fetched from the master branch.
+export RENOVATE_BASE_BRANCH_PATTERNS='["my-feature-branch"]'
 docker run renovate/renovate
 ```
 
@@ -208,4 +213,3 @@ In XML files:
 
 For more information, see supported [data sources](https://docs.renovatebot.com/modules/datasource/) and
 [versionings](https://docs.renovatebot.com/modules/versioning/).
-

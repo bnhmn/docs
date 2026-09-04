@@ -14,7 +14,7 @@
     {
       "customType": "regex",
       "managerFilePatterns": ["**/*.xml"],
-      "description": "<!-- renovate: datasource=maven depName=com.group.id:artifact.id versioning=maven -->",
+      "description": "<!-- renovate: datasource=maven depName=com.palantir.javaformat:palantir-java-format versioning=maven -->",
       "matchStrings": [
         "<!-- renovate: datasource=(?<datasource>.+?) depName=(?<depName>.+?)( versioning=(?<versioning>.+?))?\\s*-->\\s*\\n[A-Za-z0-9:/?&%._# -<>]+?(?<currentValue>\\d+(\\.\\d+)+)"
       ],
