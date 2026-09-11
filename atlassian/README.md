@@ -10,5 +10,6 @@ project managers. Their popular tools include:
 
 ## Resources
 
-* [confluence-rest-api](./confluence-rest-api/) - Describes how to use the Confluence REST API.
-* [jira-rest-api](./jira-rest-api/) - Describes how to use the Jira REST API.
+* [bitbucket](./bitbucket/) - Describes how to use the Bitbucket REST API.
+* [confluence](./confluence/) - Describes how to use the Confluence REST API.
+* [jira](./jira/) - Describes how to use the Jira REST API.
