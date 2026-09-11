@@ -1,0 +1,7 @@
+# This configuration is intended to be active when a developer starts the application locally.
+
+logging:
+  structured:
+    format:
+      # Disable structured logging in local mode
+      console: null

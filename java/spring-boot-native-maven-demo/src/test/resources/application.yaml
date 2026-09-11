@@ -1,0 +1,15 @@
+# This configuration is active when the application is being tested.
+
+logging:
+  level:
+    # Suppress 'Can not connect to Ryuk' warnings by testcontainers library
+    org.testcontainers.utility.RyukResourceReaper: ERROR
+
+spring:
+  application:
+    name: demo
+  profiles:
+    active: test
+  output:
+    ansi:
+      enabled: always

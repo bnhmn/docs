@@ -7,15 +7,10 @@ ecosystem, making it popular for web development, enterprise software, and large
 
 ## Resources
 
+* [java-logging](./java-logging/) -
+  Minimal log4js and logback configuration files with console and file output.
+  Put either of this file into the classpath and add log4j2/logback as Maven dependency to make it work.
 * [maven](./maven/) -
   Information about Maven, a popular Java build tool.
-* [spring](./spring/) -
-  Information about Spring, a framework used to build Java-based enterprise applications.
-* [pom.xml](./maven/pom.xml) -
-  A basic pom with Maven Compiler, Maven Surfire and Maven Assembly plugin.
-* [log4j2.xml](log4j2.xml) -
-  A log4j2 config with console and file output. Put this file into the classpath and add log4j2
-  as Maven dependency to make it work.
-* [logback.xml](logback.xml) -
-  A logback.xml config with console and file output. Put this file into the classpath and add
-  logback as Maven dependency to make it work.
+* [spring-boot-fundamentals](./spring-boot-fundamentals/) -
+  Information about Spring Boot, a framework used to build Java-based enterprise applications.

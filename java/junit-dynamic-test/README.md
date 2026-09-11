@@ -1,6 +1,6 @@
 # Dynamic JUnit tests
 
-You can create [dynamic test](https://docs.junit.org/6.0.2/writing-tests/dynamic-tests.html) in JUnit.
+You can create [dynamic tests](https://docs.junit.org/6.0.2/writing-tests/dynamic-tests.html) in JUnit.
 
 ## Example Test
 

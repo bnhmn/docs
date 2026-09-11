@@ -1,0 +1,10 @@
+# This configuration is the default and is active in production.
+
+logging:
+  structured:
+    format:
+      console: logstash
+
+spring:
+  application:
+    name: demo
