@@ -11,7 +11,8 @@ A **Dockerfile** is a set of instructions that tells Docker how to build a **Doc
 For instance, consider this example Dockerfile used to build an Image for a Java application:
 
 ```Dockerfile
-FROM ibm-semeru-runtimes:open-17-jre
+# https://github.com/GoogleContainerTools/distroless
+FROM gcr.io/distroless/java25-debian13:nonroot
 
 WORKDIR /app
 COPY ./java-app.jar ./java-app.jar
@@ -60,6 +61,13 @@ To build the Image with the specific Tag `java-app:1.0.0`, use the following com
 docker build -t java-app:1.0.0 .
 ```
 
+For debugging purposes, it can be useful to switch to plain logging mode, since in standard mode,
+build logs are visible in the terminal only while the build is running:
+
+```bash
+docker build -t java-app:1.0.0 . --progress=plain
+```
+
 ## Execute an Image
 
 To run an Image, which essentially means starting a Container, use the following command:
@@ -93,6 +101,13 @@ To execute a custom command (e.g. `bash`) within the Image, specify the command 
 
 ```bash
 docker run -it java-app:1.0.0 bash -c "echo Hello World!"
+```
+
+To debug file system and permission issues in a container, it can be helpful to start a shell inside the container
+and check the user's permissions within the container using commands like `whoami`, `id`, and `ls -lah`:
+
+```bash
+docker run --rm -it --entrypoint bash java-app:1.0.0
 ```
 
 Run the Image in the background (aka detached mode) using the `-d` option:
