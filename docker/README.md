@@ -20,9 +20,7 @@ COPY ./java-app.jar ./java-app.jar
 CMD [ "java", "-jar", "java-app.jar" ]
 ```
 
-<!-- markdownlint-disable MD033 -->
-<details>
-<summary>Instructions commonly used</summary>
+### Instructions commonly used
 
 * **FROM** - Set the base Image (Images can be found in the [Docker Hub](https://hub.docker.com/))
 * **RUN** - Run shell commands
@@ -31,7 +29,7 @@ CMD [ "java", "-jar", "java-app.jar" ]
 * **ENV** - Set environment variables
 * **CMD** - Set the start command
 
-</details>
+For a complete list of available options, see [Dockerfile reference](https://docs.docker.com/reference/dockerfile/).
 
 **Best practices** for writing Dockerfiles for applications written in different
 languages: <https://docs.docker.com/language/>.
