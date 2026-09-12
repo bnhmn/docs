@@ -1,0 +1,41 @@
+name: Deploy config to VM via SSH
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch: {}
+  workflow_call: {}
+
+concurrency:
+  # Cancel any ongoing jobs when a new job is triggered for the branch
+  group: "${{ github.workflow }}/${{ github.ref_name }}/deploy"
+  cancel-in-progress: true
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: git checkout
+        uses: actions/checkout@v7
+
+      # https://github.com/appleboy/scp-action
+      - name: Deploy Config
+        uses: appleboy/scp-action@v1.0.0
+        with:
+          host: ${{ vars.vm_ip }}
+          username: ${{ vars.vm_username }}
+          key: ${{ secrets.vm_ssh_key }}
+          source: config/*
+          target: ./
+          strip_components: 1
+
+      # https://github.com/appleboy/ssh-action
+      - name: Reload Apps
+        uses: appleboy/ssh-action@v1.2.5
+        with:
+          host: ${{ vars.vm_ip }}
+          username: ${{ vars.vm_username }}
+          key: ${{ secrets.vm_ssh_key }}
+          script: |
+            docker compose pull
+            docker compose up -d --force-recreate

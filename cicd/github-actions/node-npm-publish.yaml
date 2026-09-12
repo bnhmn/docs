@@ -1,0 +1,58 @@
+name: Build and publish Node.js library
+
+on:
+  push:
+    branches: ["**"]
+    tags: ["v**"]
+  workflow_dispatch: {}
+
+concurrency:
+  # Cancel any ongoing jobs when a new job is triggered for the branch
+  group: "${{ github.workflow }}/${{ github.ref_name }}/build"
+  cancel-in-progress: true
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    permissions: write-all # Required for "github release" step
+    env:
+      release: ${{ startsWith(github.ref, 'refs/tags/') }}
+
+    steps:
+      - name: git checkout
+        uses: actions/checkout@v7
+
+      - name: node setup
+        uses: actions/setup-node@v7
+        with:
+          node-version: 24 # See supported Node.js release schedule at https://nodejs.org/en/about/releases/
+          cache: npm
+
+      - run: npm ci
+
+      - run: npm run build
+
+      - run: npm run lint
+
+      - run: npm run test
+        if: always()
+
+      - run: npm run publish:npm
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_REGISTRY_TOKEN }}
+        if: env.release == 'true'
+
+      - run: npm run publish:vscode
+        env:
+          VSCE_PAT: ${{ secrets.VSCODE_MARKETPLACE_TOKEN}}
+        if: env.release == 'true'
+
+      - run: npm run package:cli
+        if: env.release == 'true'
+
+      - name: github release
+        uses: softprops/action-gh-release@v3
+        with:
+          generate_release_notes: true
+          files: "out/my-cli*"
+        if: env.release == 'true'

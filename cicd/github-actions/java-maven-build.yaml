@@ -1,0 +1,46 @@
+name: Build Java app with Maven
+
+on:
+  push:
+    branches: ["**"]
+  release:
+    types: [published]
+
+concurrency:
+  # Cancel any ongoing jobs when a new job is triggered for the branch
+  group: "${{ github.workflow }}/${{ github.ref_name }}/build"
+  cancel-in-progress: true
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    permissions: write-all
+
+    steps:
+      - name: git checkout
+        uses: actions/checkout@v7
+
+      - name: java setup
+        uses: actions/setup-java@v7
+        with:
+          java-version: 25
+          distribution: temurin
+          cache: maven
+
+      # This is an alternative if the caching provided by the setup-java action doesn't work as desired.
+      # - name: java cache setup
+      #   uses: actions/cache@v6
+      #   with:
+      #     path: ~/.m2/repository
+      #     key: maven-${{ runner.os }}-${{ hashFiles('**/pom.xml') }}
+      #     restore-keys: maven-${{ runner.os }}-
+
+      - run: mvn verify
+
+      - if: github.event_name == 'release'
+        run: mvn package -DskipTests
+
+      - if: github.event_name == 'release'
+        uses: softprops/action-gh-release@v1
+        with:
+          files: target/*.jar
