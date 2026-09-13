@@ -15,6 +15,7 @@ jobs:
   deploy:
     runs-on: ubuntu-latest
     steps:
+      # https://github.com/actions/checkout
       - name: git checkout
         uses: actions/checkout@v7
 

@@ -26,9 +26,11 @@ jobs:
       push_image: ${{github.event.inputs.push_image}}
 
     steps:
+      # https://github.com/actions/checkout
       - name: git checkout
         uses: actions/checkout@v7
 
+      # https://github.com/actions/setup-java
       - name: java setup
         uses: actions/setup-java@v7
         with:

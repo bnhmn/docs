@@ -17,9 +17,11 @@ jobs:
     permissions: write-all
 
     steps:
+      # https://github.com/actions/checkout
       - name: git checkout
         uses: actions/checkout@v7
 
+      # https://github.com/actions/setup-java
       - name: java setup
         uses: actions/setup-java@v7
         with:
@@ -28,6 +30,7 @@ jobs:
           cache: maven
 
       # This is an alternative if the caching provided by the setup-java action doesn't work as desired.
+      # # https://github.com/actions/cache
       # - name: java cache setup
       #   uses: actions/cache@v6
       #   with:
@@ -40,6 +43,7 @@ jobs:
       - if: github.event_name == 'release'
         run: mvn package -DskipTests
 
+      # https://github.com/softprops/action-gh-release
       - if: github.event_name == 'release'
         uses: softprops/action-gh-release@v1
         with:
