@@ -1,0 +1,20 @@
+# This configuration contains shared defaults for all environments
+
+logging:
+  level:
+    com.example.webapp: INFO
+    org.springframework.web: INFO
+    org.springframework.security: INFO
+
+spring:
+  application:
+    name: web-app
+  config:
+    # This imports values from the 'developer.yaml' or any 'developer-[profile].yaml' file in the 'resources' folder.
+    # There you can store configurations and secrets for testing purposes that will not be pushed to the repository.
+    # https://docs.spring.io/spring-boot/reference/features/external-config.html#features.external-config.files.importing
+    import: optional:classpath:developer.yaml
+  jackson:
+    default-property-inclusion: non_null
+  session:
+    timeout: 14d

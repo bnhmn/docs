@@ -1,0 +1,7 @@
+# Don't copy these folders into the build context
+# https://docs.docker.com/build/concepts/context/#syntax
+**/target
+**/dist
+**/node
+**/node_modules
+docker-compose.yaml
