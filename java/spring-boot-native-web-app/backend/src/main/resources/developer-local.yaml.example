@@ -1,0 +1,11 @@
+#spring:
+# security:
+#  oauth2:
+#   client:
+#    registration:
+#     idp:
+#      client-id: 2bdd02b9-f956-4f0a-8713-008e2ed3a73b
+#      client-secret: dummy-secret
+#    provider:
+#     idp:
+#      issuer-uri: https://login.microsoftonline.com/70e8cb40-fbf2-464b-9bb1-a55277847703/v2.0

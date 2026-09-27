@@ -1,0 +1,20 @@
+# This configuration contains shared defaults for all environments
+
+logging:
+  level:
+    org.springframework.security.jackson: DEBUG
+
+spring:
+  application:
+    name: web-app
+  data:
+    redis:
+      lettuce:
+        pool:
+          max-active: 16
+          max-idle: 8
+          min-idle: 1
+  jackson:
+    default-property-inclusion: non_null
+  session:
+    timeout: 14d

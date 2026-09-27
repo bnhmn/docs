@@ -1,0 +1,42 @@
+services:
+  redis:
+    image: redis:8.8.3-alpine
+    ports:
+      - "6379:6379"
+    volumes:
+      - redis:/data
+
+  # This is used to mock an OIDC identity provider such as Auth0, Okta, or Entra ID
+  # https://github.com/navikt/mock-oauth2-server
+  oidc-mock:
+    image: ghcr.io/navikt/mock-oauth2-server
+    ports:
+      - "3000:8080"
+    environment:
+      # language=json
+      JSON_CONFIG: |
+       {
+        "interactiveLogin": true,
+        "tokenCallbacks": [
+          {
+            "issuerId": "default",
+            "requestMappings": [
+              {
+                "requestParam": "code",
+                "match": "*",
+                "claims": {
+                  "aud": "test-client-id",
+                  "sub": "test-user-id",
+                  "preferred_username": "john.doe@example.com",
+                  "name": "John Doe",
+                  "scp": "openid profile offline_access",
+                  "roles": ["TestRole1"]
+                }
+              }
+            ]
+          }
+        ]
+       }
+
+volumes:
+  redis: {}

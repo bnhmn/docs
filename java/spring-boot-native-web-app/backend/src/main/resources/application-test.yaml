@@ -1,0 +1,32 @@
+# This configuration is active when the application is being tested.
+
+# As a general rule for integration tests, we always test against local Docker containers or mocks defined in
+# docker-compose.yaml rather than against real infrastructure. This ensures we are not dependent on the
+# availability of external systems and don't need to store actual credentials here
+
+spring:
+  data:
+    redis:
+      host: localhost
+      port: 6379
+      connect-timeout: 2s
+  docker:
+    compose:
+      enabled: true
+      file: ../docker-compose.yaml
+      lifecycle-management: start_only
+      skip.in-tests: false
+  security:
+    oauth2:
+      client:
+        registration:
+          idp:
+            client-id: test-client-id
+            client-secret: test-client-secret
+            scope: [ openid, profile, email, offline_access ]
+        provider:
+          idp:
+            issuer-uri: http://localhost:3000/default
+  web:
+    resources:
+      static-locations: file:../frontend/dist/

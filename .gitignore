@@ -1,6 +1,11 @@
-.idea/*
+.idea
+!.idea/codeStyles
+!.idea/dictionaries
+!.idea/inspectionProfiles
+!.idea/forwardedPorts.xml
 !.idea/jsonSchemas
 !.idea/jsonSchemas.xml
+!.idea/runConfigurations
 *.iml
 target
 out

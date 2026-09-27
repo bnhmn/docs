@@ -1,0 +1,43 @@
+# This configuration is intended for the cloud environment (dev/staging/prod)
+
+logging:
+  # Enable structured logging in cloud mode
+  structured:
+    format:
+      console: logstash
+
+spring:
+  cloud:
+    # Refresh scope is not supported with native images
+    # https://docs.spring.io/spring-cloud-config/reference/server/aot-and-native-image-support.html
+    refresh:
+      enabled: false
+  data:
+    redis:
+      host: ${REDIS_HOST}
+      port: ${REDIS_PORT}
+      # If possible, secrets should be loaded directly from a secret manager, such as HashiCorp Vault,
+      # rather than being passed via environment variable.
+      password: ${REDIS_PASSWORD}
+      ssl:
+        bundle: redis
+      connect-timeout: 2s
+  security:
+    oauth2:
+      client:
+        # This is the identity provider configuration for the OIDC login.
+        # The name for registration and provider can be chosen freely (e.g., auth0, okta, azure, keycloak, etc.).
+        registration:
+          idp:
+            client-id: ${IDP_CLIENT_ID}
+            client-secret: ${IDP_CLIENT_SECRET}
+            scope: [ openid, profile, email, offline_access ]
+        provider:
+          idp:
+            issuer-uri: https://my-idp.example.com/auth/v2
+  ssl:
+    bundle:
+      pem:
+        redis:
+          truststore:
+            certificate: ${REDIS_PEM_CERTIFICATE}

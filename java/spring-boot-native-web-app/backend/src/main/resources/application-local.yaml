@@ -1,0 +1,40 @@
+# This configuration is intended to be active when a developer starts the application locally
+
+logging:
+  level:
+    com.example.webapp: DEBUG
+    org.springframework.security: INFO
+
+spring:
+  config:
+    # This imports values from the 'developer.yaml' or any 'developer-[profile].yaml' file in the 'resources' folder.
+    # There you can store configurations and secrets for testing purposes that will not be pushed to the repository.
+    # https://docs.spring.io/spring-boot/reference/features/external-config.html#features.external-config.files.importing
+    import: optional:classpath:developer.yaml
+  data:
+    redis:
+      host: localhost
+      port: 6379
+      connect-timeout: 2s
+  docker:
+    compose:
+      enabled: true
+      file: ../docker-compose.yaml
+      lifecycle-management: start_only
+  security:
+    oauth2:
+      client:
+        # This is the identity provider configuration for the OIDC login.
+        # The name for registration and provider can be chosen freely (e.g., auth0, okta, azure, keycloak, etc.).
+        registration:
+          idp:
+            client-id: test-client-id
+            client-secret: test-client-secret
+            scope: [ openid, profile, email, offline_access ]
+        provider:
+          idp:
+            # We are testing the Entra ID login against the oidc-mock defined in docker-compose.yaml.
+            issuer-uri: http://localhost:3000/default
+  web:
+    resources:
+      static-locations: file:../frontend/dist/
