@@ -23,6 +23,10 @@ backend/** @backend-team
 .bitbucket/** @admin123 john.doe@example.com
 ```
 
+If you are unsure which usernames Bitbucket expects, use
+[Bitbucket REST API > List Users](#list-users) to look up valid usernames. The relevant field in the
+response is `name`.
+
 ## Repository Setup
 
 If you are about to create a new Bitbucket repository or reconfigure an existing one, this provides a recommended
