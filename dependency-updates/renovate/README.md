@@ -85,7 +85,6 @@ jobs:
           RENOVATE_HOST_RULES: |
             [
               {
-                "hostType": "maven",
                 "matchHost": "artifactory.example.com",
                 "username": "${{ vars.ARTIFACTORY_USERNAME }}",
                 "password": "${{ secrets.ARTIFACTORY_TOKEN }}"
@@ -94,9 +93,13 @@ jobs:
           RENOVATE_PACKAGE_RULES: |
             [
               {
-                "matchManagers": ["maven"],
+                "matchDatasources": ["maven"],
                 "matchPackageNames": ["com.example**"],
                 "registryUrls": ["https://artifactory.example.com/maven"]
+              },
+              {
+                "matchDatasources": ["npm"],
+                "registryUrls": ["https://artifactory.example.com/node"]
               }
             ]
 ```
@@ -116,7 +119,7 @@ export RENOVATE_USERNAME="<BITBUCKET-USERNAME>"
 export RENOVATE_PASSWORD="<BITBUCKET-PASSWORD>"
 export RENOVATE_AUTODISCOVER=true
 export RENOVATE_AUTODISCOVER_FILTER="MYPROJECT/my-repository"
-export RENOVATE_HOST_RULES='[{"hostType":"maven","matchHost":"artifactory.example.com","username":"'$ARTIFACTORY_USERNAME'","password":"'$ARTIFACTORY_PASSWORD'"},{"matchHost":"docker.io","enabled":false}]'
+export RENOVATE_HOST_RULES='[{"matchHost":"artifactory.example.com","username":"'$ARTIFACTORY_USERNAME'","password":"'$ARTIFACTORY_PASSWORD'"},{"matchHost":"docker.io","enabled":false}]'
 export RENOVATE_PACKAGE_RULES='[{"matchDatasources":["maven"],"matchPackageNames":["com.example.*"],"registryUrls":["https://artifactory.example.com/maven"]}]'
 export GITHUB_COM_TOKEN="<ACCESS-TOKEN-TO-READ-CHANGELOGS-FROM-GITHUB>"
 # This automatically assigns the reviewers from the CODEOWNERS file. Note that Renovate only does this
