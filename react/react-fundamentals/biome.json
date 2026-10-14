@@ -1,0 +1,35 @@
+{
+  "$schema": "https://biomejs.dev/schemas/2.5.14/schema.json",
+  "files": {
+    "includes": [
+      "**",
+      "!**/coverage",
+      "!**/dist",
+      "!**/package-lock.json",
+      "!**/generated",
+      "!**/*.gen.ts"
+    ]
+  },
+  "formatter": {
+    "indentWidth": 2,
+    "indentStyle": "space",
+    "lineWidth": 100
+  },
+  "linter": {
+    "rules": {
+      "a11y": {
+        "noAmbiguousAnchorText": "off",
+        "noSvgWithoutTitle": "off"
+      },
+      "correctness": {
+        "noUnusedImports": {
+          "level": "error",
+          "fix": "safe"
+        }
+      },
+      "style": {
+        "noNonNullAssertion": "off"
+      }
+    }
+  }
+}
