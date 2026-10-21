@@ -51,3 +51,71 @@ Make sure to extend your `.gitignore` file with:
 developer.yaml
 developer-*.yaml
 ```
+
+## Testing
+
+### Load test profiles dynamically
+
+```java
+package com.example;
+
+import org.springframework.test.context.ActiveProfilesResolver;
+
+public class TestProfileResolver implements ActiveProfilesResolver {
+
+    @Override
+    public String[] resolve(Class<?> testClass) {
+        String ci = System.getenv("CI");
+        if ("true".equals(ci)) {
+            // CI=true only when running on GitHub Actions.
+            // Then, activate both the "test" and "test-ci" profiles.
+            return new String[] { "test", "test-ci" };
+        }
+        // Otherwise, just activate the "test" profile.
+        return new String[] { "test" };
+    }
+}
+```
+
+Register the resolver on the test class with
+`@ActiveProfiles(resolver = TestProfileResolver.class)`.
+
+### Configure multiple RestTestClients
+
+When tests cover endpoints with different security requirements, define a `RestTestClient` for each
+API. See
+[RestTestClient documentation](https://docs.spring.io/spring-framework/reference/testing/resttestclient.html)
+for details.
+
+```java
+package com.example;
+
+import com.example.security.SecurityFixtures;
+import org.springframework.boot.test.context.TestConfiguration;
+import org.springframework.context.annotation.Bean;
+import org.springframework.test.web.servlet.MockMvc;
+import org.springframework.test.web.servlet.client.RestTestClient;
+
+@TestConfiguration
+public class TestConfig {
+
+    /** RestTestClient to test /api/** endpoints. */
+    @Bean
+    RestTestClient apiTestClient(MockMvc mockMvc, SecurityFixtures securityFixtures) {
+        return RestTestClient.bindTo(mockMvc)
+            .defaultHeaders(headers -> headers.setBearerAuth(securityFixtures.aValidApiToken()))
+            .build();
+    }
+
+    /** RestTestClient to test /internal/** endpoints. */
+    @Bean
+    RestTestClient internalTestClient(MockMvc mockMvc, SecurityFixtures securityFixtures) {
+        return RestTestClient.bindTo(mockMvc)
+            .defaultHeaders(headers -> headers.setBearerAuth(securityFixtures.aValidIntToken()))
+            .build();
+    }
+}
+```
+
+Import this configuration in the test class and inject the client through a constructor parameter
+whose name matches the bean name, such as `apiTestClient` or `internalTestClient`.
