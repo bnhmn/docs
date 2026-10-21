@@ -1,7 +1,6 @@
 # React with Vite
 
-This guide shows how to set up a new [React](https://react.dev/) app, written in
-[TypeScript](https://www.typescriptlang.org/) and built with [Vite](https://vite.dev/).
+This guide shows how to set up a new [React](https://react.dev/) app with [Vite](https://vite.dev/).
 
 ## 1. Create a React project using Vite
 
@@ -97,7 +96,9 @@ This formats and checks staged files, then stages any fixes.
 
 After implementing the UI, add component tests to ensure that the UI behaves as expected.
 
-### Requirements
+### Setup
+
+#### Dependencies
 
 ```bash
 npm install -D vitest jsdom @vitest/coverage-v8 @testing-library/react @testing-library/jest-dom @testing-library/user-event
@@ -109,7 +110,7 @@ solution for testing React components that encourages better testing practices.
 [jsdom](https://github.com/jsdom/jsdom) is a a Node.js implementation of various web standards, with
 the goal to emulate enough of a subset of a web browser to be useful for testing.
 
-### package.json
+#### package.json
 
 Add these scripts to your `package.json` file:
 
@@ -122,7 +123,7 @@ Add these scripts to your `package.json` file:
 }
 ```
 
-### tsconfig.node.json
+#### tsconfig.node.json
 
 Extend your `tsconfig.node.json` file:
 
@@ -139,7 +140,7 @@ Extend your `tsconfig.node.json` file:
 }
 ```
 
-### vite.config.ts
+#### vite.config.ts
 
 Save this `vite.config.ts` file in your project root:
 
@@ -166,7 +167,7 @@ export default defineConfig({
 });
 ```
 
-### vitest.setup.ts
+#### vitest.setup.ts
 
 Save this `vitest.setup.ts` file in your project root.
 
@@ -182,7 +183,7 @@ afterEach(() => {
 });
 ```
 
-### Create and Run Tests
+### Create and run tests
 
 Create the following test:
 
@@ -206,6 +207,116 @@ describe("App", () => {
 ```
 
 and run `npm test` to execute it.
+
+### Structure Tests with Reusable Fixtures
+
+A test fixture, also known as a test data builder, creates reusable test data with sensible
+defaults, making tests clearer and easier to maintain.
+
+For example, this component displays songs in a playlist:
+
+```tsx
+// src/components/Playlist.tsx
+export type Song = {
+  id: number;
+  title: string;
+  artist: string;
+};
+
+type PlaylistProps = {
+  songs: Song[];
+  onPlay: (song: Song) => void;
+};
+
+export function Playlist({ songs, onPlay }: PlaylistProps) {
+  if (songs.length === 0) {
+    return <p>No songs in the playlist</p>;
+  }
+  return (
+    <ul aria-label="Playlist">
+      {songs.map((song) => (
+        <li key={song.id}>
+          <span>
+            {song.title} — {song.artist}
+          </span>
+          <button type="button" onClick={() => onPlay(song)}>
+            Play {song.title}
+          </button>
+        </li>
+      ))}
+    </ul>
+  );
+}
+```
+
+This test fixture provides a default song and allows individual tests to override its fields:
+
+```ts
+// test/support/song-fixtures.ts
+import type { Song } from "../../src/components/Playlist";
+
+export function aSong(overrides: Partial<Song> = {}): Song {
+  return {
+    id: 1,
+    title: "Here Comes the Sun",
+    artist: "The Beatles",
+    ...overrides,
+  };
+}
+```
+
+The following tests use the song fixture to test the playlist component:
+
+```tsx
+// test/components/Playlist.test.tsx
+import { render, screen } from "@testing-library/react";
+import userEvent from "@testing-library/user-event";
+import { describe, expect, it, vi } from "vitest";
+import { Playlist, type Song } from "../../src/components/Playlist";
+import { aSong } from "../support/song-fixtures";
+
+describe("Playlist", () => {
+  function renderPlaylist(songs: Song[] = [aSong()]) {
+    // Render fixture: shared component rendering, mock setup, and common lookup helpers.
+    const user = userEvent.setup();
+    const onPlay = vi.fn<(song: Song) => void>();
+    render(<Playlist songs={songs} onPlay={onPlay} />);
+    return {
+      user,
+      onPlay,
+      songList: () => screen.queryAllByRole("listitem"),
+      playButton: (title: string) => screen.getByRole("button", { name: `Play ${title}` }),
+    };
+  }
+
+  const song1 = aSong();
+  const song2 = aSong({ id: 2, title: "Yellow Submarine" });
+
+  it("shows songs in the supplied order", () => {
+    const { songList } = renderPlaylist([song1, song2]);
+    const songs = songList();
+
+    expect(songs).toHaveLength(2);
+    expect(songs[0]).toHaveTextContent(song1.title);
+    expect(songs[1]).toHaveTextContent(song2.title);
+  });
+
+  it("plays the selected song", async () => {
+    const { user, onPlay, playButton } = renderPlaylist([song1, song2]);
+
+    await user.click(playButton(song2.title));
+
+    expect(onPlay).toHaveBeenCalledWith(song2);
+  });
+
+  it("shows an empty state when there are no songs", () => {
+    const { songList } = renderPlaylist([]);
+
+    expect(songList()).toHaveLength(0);
+    expect(screen.getByText("No songs in the playlist")).toBeVisible();
+  });
+});
+```
 
 ### More Information
 

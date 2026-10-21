@@ -353,24 +353,101 @@ src/
 ├─ shared/
 │  ├─ components/       # App-wide UI, such as navigation
 │  ├─ lib/              # Generic helpers, such as formatters
-│  └─ api/              # API client and generated requests
+│  └─ api/              # API client and generated types
 └─ tests/
    ├─ products/
-   │  └─ components/    # Product component tests
+   │  ├─ components/    # Product component tests
+   │  └─ support/       # Product test utilities (fixtures, mocks, etc.)
    └─ e2e/              # Browser-level end-to-end tests
 ```
 
-Route files connect URLs to pages, and `routes/__root.tsx` defines the root layout. Put app-wide UI,
-such as navigation, in `shared/components/` and render it from the root layout. Components inside
-`features/products/` render product-specific UI. Put generic helpers such as date or currency
-formatters in `shared/lib/`. Keep feature-specific helpers inside their feature. The `shared/api/`
-folder holds the API client and generated request code. Keep tests in the top-level `tests/` folder
-and mirror the feature structure. This keeps the source tree focused on application code while
-making related tests easy to find.
+1. Route files connect URLs to pages, and the `__root.tsx` route defines the root layout.
+2. Put app-wide UI, such as navigation, in `shared/components` and render it from the root layout.
+3. Components inside `features/products` render product-specific UI.
+4. Put generic helpers such as date or currency formatters in `shared/lib`.
+5. Keep feature-specific helpers inside their feature.
+6. Keep tests in the top-level `tests` folder and mirror the feature structure. This cleanly
+   separates source and test code.
 
-## 7. Learn More
+## 7. Testing
+
+### React test basics
+
+The [React component testing guide](../react-fundamentals/README.md#4-test-react-components) covers
+the general test setup and recommended testing patterns.
+
+### Testing TanStack Query
+
+Components that use `useQuery` need a `QueryClientProvider`. Create a fresh `QueryClient` for each
+test with seeded data, so the component doesn't need to make a network request (if you need to test
+data fetching, error, retry, or refetch behavior, mock the API instead).
+
+```tsx
+// tests/support/render-with-products.tsx
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import { render } from "@testing-library/react";
+import userEvent from "@testing-library/user-event";
+import type { ReactElement } from "react";
+import type { Product } from "../../src/...";
+
+export function renderWithProducts(ui: ReactElement, products: Product[]) {
+  const queryClient = new QueryClient({
+    // Disable retries so tests fail fast, and use infinite staleTime to prevent refetching
+    defaultOptions: { queries: { retry: false, staleTime: Infinity } },
+  });
+  queryClient.setQueryData(["products"], { products });
+
+  render(<QueryClientProvider client={queryClient}>{ui}</QueryClientProvider>);
+  return { user: userEvent.setup() };
+}
+```
+
+### Testing TanStack Router
+
+Components that use router hooks or links must render inside a `RouterProvider`. Use
+`createMemoryHistory` to start at a chosen path without relying on the browser URL. Apply the
+generated route tree and provide the `QueryClient` to both the router and query context, so tests
+can cover the loader and navigation.
+
+```tsx
+// tests/support/render-products-page.tsx
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import { createMemoryHistory, createRouter, RouterProvider } from "@tanstack/react-router";
+import { render } from "@testing-library/react";
+import userEvent from "@testing-library/user-event";
+import { routeTree } from "../../src/routeTree.gen";
+import type { Product } from "../../src/...";
+
+export function renderProductsPage(products: Product[]) {
+  const queryClient = new QueryClient({
+    // Disable retries so tests fail fast, and use infinite staleTime to prevent refetching
+    defaultOptions: { queries: { retry: false, staleTime: Infinity } },
+  });
+  queryClient.setQueryData(["products"], { products });
+
+  const router = createRouter({
+    routeTree,
+    context: { queryClient },
+    history: createMemoryHistory({ initialEntries: ["/products"] }),
+  });
+
+  render(
+    <QueryClientProvider client={queryClient}>
+      <RouterProvider router={router} />
+    </QueryClientProvider>,
+  );
+  return { router, user: userEvent.setup(), queryClient };
+}
+```
+
+Await route content with `findBy...` queries when loading is asynchronous.
+
+For an isolated component, you don't need to provide the full route tree; a small test router with
+only the needed route is enough.
+
+## 8. Learn More
 
 You can learn more about all of the offerings from TanStack in the
 [TanStack documentation](https://tanstack.com).
 
-See also [React - Recommended Tools](../react-fundamentals/#5-recommended-tools).
+See also [React - Recommended Tools](../react-fundamentals/README.md#5-recommended-tools).
