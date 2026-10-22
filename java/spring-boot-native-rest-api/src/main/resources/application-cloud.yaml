@@ -1,0 +1,29 @@
+# This configuration is intended for the cloud environment (dev/staging/prod)
+
+logging:
+  structured:
+    format:
+      console: logstash  # Enable structured logging
+
+server:
+  # https://docs.spring.io/spring-boot/how-to/webserver.html#howto.webserver.use-behind-a-proxy-server
+  forward-headers-strategy: native
+
+spring:
+  cloud:
+    # Refresh scope is not supported with native images
+    # https://docs.spring.io/spring-cloud-config/reference/server/aot-and-native-image-support.html
+    refresh:
+      enabled: false
+  datasource:
+    url: ${POSTGRES_JDBC_URL}
+    username: ${POSTGRES_USERNAME}
+    # If possible, secrets should be loaded directly from a secret manager, like HashiCorp Vault, instead of env vars
+    password: ${POSTGRES_PASSWORD}
+  security:
+    oauth2:
+      resourceserver:
+        jwt:
+          # https://docs.spring.io/spring-security/reference/servlet/oauth2/resource-server/jwt.html
+          issuer-uri: https://myidp.example.com/auth/v2
+          audiences: https://myapi.example.com

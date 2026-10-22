@@ -1,0 +1,5 @@
+logging:
+  level:
+    com.example.demo: TRACE
+    org.springframework.web: TRACE
+    org.springframework.security: TRACE

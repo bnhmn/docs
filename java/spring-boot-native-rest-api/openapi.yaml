@@ -1,0 +1,110 @@
+openapi: 3.1.0
+info:
+  title: Playlist API
+  version: 1.0.0
+  description: API for managing the user's playlist.
+
+servers:
+  - url: https://api.example.com
+
+tags:
+  - name: Playlist
+    description: Playlist of the authenticated user
+
+security:
+  - bearerAuth: []
+
+paths:
+  /me/playlist:
+    get:
+      tags: [Playlist]
+      operationId: getMyPlaylist
+      summary: Get or create the playlist
+      responses:
+        '200':
+          description: Playlist of the authenticated user
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Playlist'
+
+  /me/playlist/songs:
+    post:
+      tags: [Playlist]
+      operationId: addSongToMyPlaylist
+      summary: Add a song to the playlist
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/NewSong'
+      responses:
+        '200':
+          description: Playlist with the added song
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Playlist'
+
+  /me/playlist/songs/{songId}:
+    delete:
+      tags: [Playlist]
+      operationId: removeSongFromMyPlaylist
+      summary: Remove a song from the playlist
+      parameters:
+        - name: songId
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Playlist with the song removed, or unchanged if the song was not present
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Playlist'
+
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+
+  schemas:
+    Playlist:
+      type: object
+      required: [songs]
+      properties:
+        songs:
+          type: array
+          description: Songs in the playlist; may be empty
+          items:
+            $ref: '#/components/schemas/Song'
+
+    Song:
+      type: object
+      required: [id, title, artist]
+      properties:
+        id:
+          type: string
+          description: Unique song identifier
+        title:
+          type: string
+          description: Song title
+        artist:
+          type: string
+          description: Song artist
+
+    NewSong:
+      type: object
+      required: [title, artist]
+      properties:
+        title:
+          type: string
+          description: Song title
+        artist:
+          type: string
+          description: Song artist

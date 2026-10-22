@@ -8,7 +8,8 @@ logging:
   level:
     com.example.webapp: DEBUG
     org.springframework.web: DEBUG
-    org.springframework.security: INFO
+    org.springframework.security: DEBUG
+    org.springframework.security.oauth2: TRACE
 
 spring:
   data:
@@ -19,7 +20,7 @@ spring:
   docker:
     compose:
       enabled: true
-      file: ../docker-compose.yaml
+      file: ../compose.yaml
       lifecycle-management: start_only
   security:
     oauth2:
@@ -30,7 +31,7 @@ spring:
           idp:
             client-id: test-client-id
             client-secret: test-client-secret
-            scope: [ openid, profile, email, offline_access ]
+            scope: [openid, profile, email, offline_access]
         provider:
           idp:
             # We are testing the login against the oidc-mock defined in docker-compose.yaml.

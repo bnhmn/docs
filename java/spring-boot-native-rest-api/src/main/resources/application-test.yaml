@@ -1,0 +1,30 @@
+# This configuration is active when the application is being tested.
+
+# In integration tests, we generally test against containers defined in TestContainers.java rather than real
+# infrastructure. This ensures we are not dependent on the availability of external systems and don't need to
+# store actual credentials here.
+
+logging:
+  level:
+    com.example.demo: DEBUG
+    org.springframework.web: DEBUG
+    org.springframework.security: INFO
+    org.springframework.security.oauth2: INFO
+    org.testcontainers.utility.RyukResourceReaper: ERROR  # Suppress "Can not connect to Ryuk" warnings
+    org.testcontainers.containers.wait.strategy: WARN
+
+spring:
+  output:
+    ansi:
+      enabled: always
+  security:
+    oauth2:
+      resourceserver:
+        jwt:
+          # https://docs.spring.io/spring-security/reference/servlet/oauth2/resource-server/jwt.html
+          # Placeholder to activate JWT auto-configuration. # Overridden by TestContainers.oauthProperties
+          issuer-uri: https://issuer-placeholder.invalid
+          audiences: https://myapi.example.com
+  testcontainers:
+    beans:
+      startup: parallel

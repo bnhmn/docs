@@ -1,0 +1,31 @@
+# This configuration is intended to be active when a developer starts the application locally
+
+# In the local environment, we generally test against containers defined in compose.yaml rather than real
+# infrastructure. This ensures we are not dependent on the availability of external systems and don't need to
+# store actual credentials here.
+
+logging:
+  level:
+    com.example.demo: DEBUG
+    org.springframework.web: DEBUG
+    org.springframework.security: DEBUG
+    org.springframework.security.oauth2: TRACE
+  structured:
+    format:
+      console: ""  # Disable structured logging
+
+spring:
+  datasource:
+    url: jdbc:postgresql://localhost:5432/mydatabase
+    username: myuser
+    password: mypassword
+  docker:
+    compose:
+      lifecycle-management: start_only
+  security:
+    oauth2:
+      resourceserver:
+        jwt:
+          # https://docs.spring.io/spring-security/reference/servlet/oauth2/resource-server/jwt.html
+          issuer-uri: http://localhost:3000/default
+          audiences: https://myapi.example.com
