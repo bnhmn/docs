@@ -194,7 +194,7 @@ with the authorization server and the API scopes it requires must have been enab
 
 ### Typical JWT token claims (ACF)
 
-Access tokens are [JSON Web Tokens (JWT)](https://www.jwt.io/introduction#what-is-json-web-token) in
+Access tokens are [JSON Web Tokens (JWT)](https://www.jwt.io/introduction) in
 most deployments, and their claims typically include information about the issuer, user, API,
 client, and granted scopes. However, OAuth also allows opaque access tokens, which the resource
 server validates through [token introspection](https://www.rfc-editor.org/info/rfc7662/). The exact
@@ -455,7 +455,7 @@ the authorization server and the API scopes it requires must have been enabled.
 
 ### Typical JWT token claims (CCF)
 
-Access tokens are [JSON Web Tokens (JWT)](https://www.jwt.io/introduction#what-is-json-web-token) in
+Access tokens are [JSON Web Tokens (JWT)](https://www.jwt.io/introduction) in
 most deployments, and their claims typically include information about the issuer, user, API,
 client, and granted scopes. However, OAuth also allows opaque access tokens, which the resource
 server validates through [token introspection](https://www.rfc-editor.org/info/rfc7662/). The exact
