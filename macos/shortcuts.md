@@ -11,10 +11,14 @@ Ctrl-Key = ⌃
 ## macOS
 
 ```text
-Make Screenshot:                              Shift-Cmd-4
 Refresh:                                      Cmd-R
-Lock screen:                                  Ctrl-Cmd-Q
+Quit App:                                     Cmd-Q
+Lock Screen:                                  Ctrl-Cmd-Q
+Make Screenshot:                              Shift-Cmd-4
 Search Apps (Spotlight):                      Cmd-Space
+Move Cursor to start of line                  Ctrl-A
+Move Cursor to end of line                    Ctrl-E
+Move Cursor to next/prev word                 Alt-Right/Left
 Open Emoji keyboard:                          Ctrl-Cmd-Space
 Mute MS Teams:                                Cmd-Shift-M
 Show Desktop                                  F11
@@ -79,6 +83,7 @@ Replace All Findings                  Cmd-Enter
 Debug / Step to next Breakpoint       F5
 Git Pull (Custom)                     Alt-P
 Quick Fix                             Alt-Enter
+Add Cursor above or below             Cmd-Alt-UP/DOWN
 Add Cursors in selection              Alt-Shift-I
 Add another Cursor at position        Alt-CLICK
 Delete current line                   Ctrl-K

@@ -1,0 +1,5 @@
+# ~/.nanorc
+# Necessary so that you can use Alt-Left/Right to navigate to the prev or next word in nano.
+# Note that this requires a recent version of nano and won't work with macOS' default nano version.
+bind M-f nextword main
+bind M-b prevword main

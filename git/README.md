@@ -1,9 +1,10 @@
 # Git
 
-[Git](https://git-scm.com/) is a distributed version control system that allows developers to track changes in source
-code during software development. It enables multiple users to collaborate on projects, manage code versions, and revert
-to previous states if needed, all while maintaining a complete history of code changes. Git is widely used for its
-efficiency, flexibility, and support for branching and merging.
+[Git](https://git-scm.com/) is a distributed version control system that allows developers to track
+changes in source code during software development. It enables multiple users to collaborate on
+projects, manage code versions, and revert to previous states if needed, all while maintaining a
+complete history of code changes. Git is widely used for its efficiency, flexibility, and support
+for branching and merging.
 
 ## Git Tutorial
 
@@ -19,17 +20,18 @@ Delete a file after adding it to .gitignore   git rm --cached */.DS_Store
 
 ## Git Tooling
 
-* [git-cliff](https://git-cliff.org/docs/) - Generate a changelog file from the Git history.
+- [git-cliff](https://git-cliff.org/docs/) - Generate a changelog file from the Git history.
 
 ## Git Config
 
 Git configuration files contains settings that influence the Git commands' behavior.
 
-* The file `.git/config` in a repository is used to store the configuration for that repository.
-* The file `$HOME/.gitconfig` is used to store a per-user default configuration.
-* The file `/etc/gitconfig` can be used to store a system-wide default configuration.
+- The file `.git/config` in a repository is used to store the configuration for that repository.
+- The file `$HOME/.gitconfig` is used to store a per-user default configuration.
+- The file `/etc/gitconfig` can be used to store a system-wide default configuration.
 
-See [git config](https://git-scm.com/docs/git-config#_configuration_file) for explanations and available options.
+See [git config](https://git-scm.com/docs/git-config#_configuration_file) for explanations and
+available options.
 
 This is a sample user configuration file:
 
@@ -54,13 +56,14 @@ This is a sample user configuration file:
 
 ### Multi Tenant Setup
 
-If you work for different companies or simply want to separate business projects from personal ones, you can create
-separate directories for each project and set up individual Git configurations for each one.
+If you work for different companies or simply want to separate business projects from personal ones,
+you can create separate directories for each project and set up individual Git configurations for
+each one.
 
 Create the following folder structure in your home directory:
 
 ```text
-git
+Git
 ├── PROJECT1
 │   └── .gitconfig
 └── PROJECT2
@@ -70,13 +73,13 @@ git
 Extend your Git user configuration file at `~/.gitconfig`:
 
 ```ini
-[includeIf "gitdir:~/git/PROJECT1/"]
+[includeIf "gitdir:~/Git/PROJECT1/"]
   # Include this config if git repo is inside PROJECT1 folder
-  path = ~/git/PROJECT1/.gitconfig
+  path = ~/Git/PROJECT1/.gitconfig
 
-[includeIf "gitdir:~/git/PROJECT2/"]
+[includeIf "gitdir:~/Git/PROJECT2/"]
   # Include this config if git repo is inside PROJECT2 folder
-  path = ~/git/PROJECT2/.gitconfig
+  path = ~/Git/PROJECT2/.gitconfig
 ```
 
 Create the `PROJECT1/.gitconfig` file
@@ -97,6 +100,6 @@ Create the `PROJECT2/.gitconfig` file
   username = john-doe-company-b
 ```
 
-When you now switch to the `PROJECT1` folder and clone a GitHub repository, Git will use the email and credentials
-for **company a**.
-Similarly, for all Git repositories in the `PROJECT2` folder, Git will use the email and credentials for **company b**.
+When you now switch to the `PROJECT1` folder and clone a GitHub repository, Git will use the email
+and credentials for **company a**. Similarly, for all Git repositories in the `PROJECT2` folder, Git
+will use the email and credentials for **company b**.
