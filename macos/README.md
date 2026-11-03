@@ -20,6 +20,7 @@ See [shortcuts.md](shortcuts.md).
 
 Optional:
 
+- [Obsidian](https://obsidian.md/) (Markdown-based notes on your local device)
 - [Rectangle](https://rectangleapp.com/) (Snap windows to the left, right, etc.)
 - [KeepingYouAwake](https://keepingyouawake.app/) (Prevent the MacBook from going into sleep mode)
 - [serviceman](https://webinstall.dev/serviceman/) (systemd, launchd manager)
