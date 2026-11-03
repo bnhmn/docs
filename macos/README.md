@@ -22,6 +22,7 @@ Optional:
 
 - [Obsidian](https://obsidian.md/) (Markdown-based notes on your local device)
 - [Rectangle](https://rectangleapp.com/) (Snap windows to the left, right, etc.)
+- [Bruno](https://www.usebruno.com/) (HTTP client, Postman alternative)
 - [KeepingYouAwake](https://keepingyouawake.app/) (Prevent the MacBook from going into sleep mode)
 - [serviceman](https://webinstall.dev/serviceman/) (systemd, launchd manager)
 - [Karabiner-Elements](https://karabiner-elements.pqrs.org/) (keyboard customizer)
@@ -65,6 +66,8 @@ brew install "${apps[@]}"
 
 Use [colima](https://github.com/abiosoft/colima). Works with docker compose and buildx too:
 <https://aosolorzano.medium.com/1ce8b3bae158>
+
+For configuration options, refer to <https://colima.run/docs/configuration/>.
 
 ## Run Ubuntu VM
 
