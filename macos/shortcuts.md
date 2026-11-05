@@ -48,7 +48,7 @@ Find Usages                          Alt-F7
 Add another Cursor at position       Alt-Shift-CLICK
 Add Cursor above or below            Alt Alt-UP/DOWN
 Add Cursors in selection             Alt-Shift-G
-Select over multiple lines           Alt -> Move Cursor
+Rectangular Select                   MOUSE-WHEEL-CLICK -> Move Cursor
 Expand selection to enclosed string  Cmd-W twice
 Open Settings                        Cmd-,
 Duplicate Line                       Cmd-D
@@ -86,6 +86,7 @@ Quick Fix                             Alt-Enter
 Add Cursor above or below             Cmd-Alt-UP/DOWN
 Add Cursors in selection              Alt-Shift-I
 Add another Cursor at position        Alt-CLICK
+Rectangular Select                    MOUSE-WHEEL-CLICK -> Move Cursor
 Delete current line                   Ctrl-K
 Execute File (Code Runner Extension)  Ctrl-Alt-N
 Compare Folders (Extension)           Command-Palette -> Compare 2 folders

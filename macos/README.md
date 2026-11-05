@@ -23,6 +23,7 @@ Optional:
 - [Obsidian](https://obsidian.md/) (Markdown-based notes on your local device)
 - [Rectangle](https://rectangleapp.com/) (Snap windows to the left, right, etc.)
 - [Bruno](https://www.usebruno.com/) (HTTP client, Postman alternative)
+- [Typewhisper](https://github.com/TypeWhisper/typewhisper-mac) (local speech to text)
 - [KeepingYouAwake](https://keepingyouawake.app/) (Prevent the MacBook from going into sleep mode)
 - [serviceman](https://webinstall.dev/serviceman/) (systemd, launchd manager)
 - [Karabiner-Elements](https://karabiner-elements.pqrs.org/) (keyboard customizer)
@@ -31,7 +32,7 @@ Optional:
 
 ```bash
 apps=(
-  openjdk@25
+  openjdk
   maven
   python3
   node
@@ -44,6 +45,8 @@ apps=(
   ccat             # colorized cat
   z                # warp into directory
   nano             # latest nano with more features than macOS default
+  yq               # jq-like parser for YAML, XML, CSV, JSON
+  htmlq            # jq-like parser for HTML
   romkatv/powerlevel10k/powerlevel10k     # zsh theme
 )
 brew install "${apps[@]}"
@@ -75,4 +78,18 @@ Use [multipass](https://multipass.run/install).
 
 ```bash
 multipass list
+```
+
+## Debug USB Devices
+
+List all connected USB devices:
+
+```bash
+ioreg -p IOUSB
+```
+
+Show details of a specific device by its name:
+
+```bash
+ioreg -p IOUSB -rln "USB Gaming Mouse"
 ```

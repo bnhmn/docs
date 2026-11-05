@@ -23,12 +23,13 @@ alias gc="git commit -am"
 alias ga="git commit --amend --no-edit"
 alias gaa="git commit -a --amend --no-edit"
 alias gp="git push origin"
-alias gpf="git push origin --force"
+alias gpf="git push origin --force-with-lease"
 alias gs="git status"
 alias reset="source ~/.zshrc"
 alias ports="lsof -i -P | grep LISTEN"
 
 # Git prune all branches that have been deleted from the remote
+unalias gpr 2>/dev/null || true
 function gpr() {
   git checkout main 2>/dev/null || git checkout master 2>/dev/null || true
   git pull -p

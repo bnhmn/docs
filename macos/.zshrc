@@ -41,5 +41,12 @@ source <(fzf --zsh)
 # z (warp into directory)
 . /opt/homebrew/etc/profile.d/z.sh
 
+# Enable fuzzy matching on file path auto completion using TAB
+zstyle ':completion:*' matcher-list 'm:{a-zA-Z}={A-Za-z}' 'r:|[._-]=* r:|=*' 'l:|=* r:|=*'
+
+# This swaps the keys '^°' and '<>' to fix key mapping issues with Windows keyboards on macOS
+# hidutil property --set '{"UserKeyMapping":[]}'
+# hidutil property --set '{"UserKeyMapping":[{"HIDKeyboardModifierMappingSrc":0x700000035,"HIDKeyboardModifierMappingDst":0x700000064},{"HIDKeyboardModifierMappingSrc":0x700000064,"HIDKeyboardModifierMappingDst":0x700000035}]}' >/dev/null
+
 # Load custom environment config
 source ~/.env.sh
