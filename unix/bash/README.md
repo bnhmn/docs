@@ -21,6 +21,66 @@ set -euo pipefail
 : "${DATABASE_PASSWORD:?missing env variable}"
 ```
 
+## Recommended Script Structure
+
+A minimal script layout: header comment with usage, variables at the top, logic in
+functions, `main` first, remaining functions top-down in call order, and the call to `main` at the
+very end:
+
+```bash
+#!/usr/bin/env bash
+# Prints a greeting for each given name.
+# Usage: greet.sh [-loud] <name>...
+set -euo pipefail
+
+: "${GREETING:=Hello}"
+: "${LOUD:=false}"
+
+names=()
+
+main() {
+  parse_args "$@"
+  for name in "${names[@]}"; do
+    greet "$name"
+  done
+  log "Done: ${#names[@]} greeted"
+}
+
+parse_args() {
+  for arg in "$@"; do
+    case "$arg" in
+      -loud|--loud) LOUD=true ;;
+      -*) die "Unknown option: $arg (allowed: -loud)" ;;
+      *) names+=("$arg") ;;
+    esac
+  done
+  [ "${#names[@]}" -gt 0 ] || die "No name given (usage: greet.sh [-loud] <name>...)"
+}
+
+greet() { # <name>
+  if [ "$LOUD" = true ]; then
+    echo "$GREETING, $1!" | tr '[:lower:]' '[:upper:]'
+  else
+    echo "$GREETING, $1!"
+  fi
+}
+
+log() {
+  printf '==> %s\n' "$*"
+}
+
+warn() {
+  printf 'Warning: %s\n' "$*" >&2
+}
+
+die() {
+  printf 'Error: %s\n' "$*" >&2
+  exit 1
+}
+
+main "$@"
+```
+
 ## Bash Options
 
 Bash options are settings that modify the shell's behavior. They are set using the set command.
