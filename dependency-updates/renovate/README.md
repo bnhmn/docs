@@ -3,53 +3,85 @@
 <img width="80px" src="https://docs.renovatebot.com/assets/images/logo.png" alt="Renovate Logo">
 
 You can use [Renovate](https://docs.renovatebot.com/) to automatically update software dependencies.
-Renovate is an automated tool that scans software repositories for dependencies, checks whether newer versions of those dependencies are available, and then creates pull requests with these updates in the project's codebase.
-Renovate needs to be set up and configured one-time for each repository. During this process, a job must be created in the build system which will run Renovate at regular intervals.
+Renovate is an automated tool that scans software repositories for dependencies, checks whether
+newer versions of those dependencies are available, and then creates pull requests with these
+updates in the project's codebase. Renovate needs to be set up and configured one-time. During this
+process, a build system job must be created which will run Renovate at regular intervals. See also
+[How Renovate Works](https://docs.renovatebot.com/key-concepts/how-renovate-works/).
 
 ## How to Run
 
-You can run Renovate either via [Node](https://nodejs.org/en)
-
-```bash
-npx renovate
-```
-
-or via [Docker](https://docs.docker.com/get-docker/):
+### Via Docker
 
 ```bash
 docker run renovate/renovate
 ```
 
+<!-- prettier-ignore -->
+> [!WARNING]
+> The standard image lacks tools for some package managers, such as `npm`, and downloads them on
+> demand at runtime, so it needs internet access for those.
+>
+> Without internet access, use a
+> [full image](https://docs.renovatebot.com/getting-started/running/#docker-images) instead. Note
+> that it's considerably larger (~2.5GB vs. ~500MB), so pulling it and starting the job typically
+> takes 20-30 seconds longer.
+>
+> Alternatively, keep the standard image and
+> [redirect its tool downloads](https://github.com/containerbase/base/blob/main/docs/custom-registries.md)
+> (Node/npm) to a corporate registry such as Nexus.
+
+### Via Node
+
+```bash
+npx renovate
+```
+
 ## Configuration
 
-Renovate needs to be configured at two levels:
-The [repository configuration](https://docs.renovatebot.com/configuration-options/)
-and the [bot configuration](https://docs.renovatebot.com/self-hosted-configuration/).
+Renovate needs to be configured at two levels: The
+[Repository Configuration](#repository-configuration) and the
+[Bot Configuration](#bot-configuration).
 
 ### Repository Configuration
 
-The repository configuration is located in the software repository, whose dependencies are being tracked,
-and it solely concerns this repository. There, for example, the granularity of the pull requests can be adjusted.
-The repository can be configured via a [renovate.json](https://docs.renovatebot.com/configuration-options/) file:
+The repository configuration [renovate.json](https://docs.renovatebot.com/configuration-options/) is
+located in the repository, whose dependencies are being tracked, and it solely concerns this
+repository:
 
 ```json
 {
   "$schema": "https://docs.renovatebot.com/renovate-schema.json",
   "description": "See https://docs.renovatebot.com/configuration-options for available options",
-  "ignorePaths": [
-    ".github/workflows/**"
-  ]
+  "extends": ["github>my-github-org/my-repo//renovate/default"],
+  "packageRules": []
 }
 ```
 
+For a simple best practice config, see [standalone.json](./standalone.json).
+
 ### Bot Configuration
 
-The Renovate Bot configuration is stored in the build system job, which runs Renovate regularly. It contains the
-credentials to provide access to the software repositories and registries, and global configuration options.
-The Renovate bot can be configured via [environment variables](https://docs.renovatebot.com/self-hosted-configuration/).
+The bot configuration is provided via
+[environment variables](https://docs.renovatebot.com/self-hosted-configuration/) to the build system
+job, which runs Renovate. It contains global configuration and credentials to access corporate
+registries. This job should be set to run automatically on a periodic basis (e.g., once per hour) so
+that Renovate can automatically fix, rebase, and merge pull requests (if
+[auto-merge](https://docs.renovatebot.com/key-concepts/automerge/) is enabled).
+
+By default, Renovate processes all available repositories one after another, but you can restrict it
+to specific repositories using
+[autodiscoverFilter](https://docs.renovatebot.com/self-hosted-configuration/#autodiscoverfilter).
+When a repository is scanned for the first time and does not yet contain a
+[renovate.json](#repository-configuration) file, Renovate initiates an onboarding process via an
+[onboarding pull request](https://docs.renovatebot.com/getting-started/installing-onboarding/#repository-onboarding).
+
+If you do not want Renovate to create pull requests constantly, you can restrict this behavior using
+the [schedule](https://docs.renovatebot.com/configuration-options/#schedule) property.
 
 #### GitHub
 
+<!-- prettier-ignore -->
 ```yaml
 name: Renovate Dependencies
 
@@ -81,6 +113,14 @@ jobs:
           RENOVATE_AUTODISCOVER_FILTER: ${{ inputs.repository_name }}
           # Only run on repositories tagged with 'renovate'
           RENOVATE_AUTODISCOVER_TOPICS: renovate
+          # The config that Renovate places in the repo during onboarding
+          RENOVATE_ONBOARDING_CONFIG: |
+            {
+              "$schema": "https://docs.renovatebot.com/renovate-schema.json",
+              "description": "See https://docs.renovatebot.com/configuration-options for available options",
+              "extends": ["github>my-github-org/my-repo//renovate/default"],
+              "packageRules": []
+            }
           # Credentials to access a private registry
           RENOVATE_HOST_RULES: |
             [
@@ -135,15 +175,19 @@ docker run renovate/renovate
 
 ### How to Debug
 
+<!-- prettier-ignore -->
 > [!IMPORTANT]
-> Renovate typically operates on the repository's **default branch** and retrieves all data via the
-> [platform](https://docs.renovatebot.com/modules/platform/)'s API (e.g., GitHub, GitLab, or Bitbucket).
-> However, this makes it difficult to test configuration options, since there is no way to make Renovate
-> read the **repository configuration** from a feature branch instead of the main branch.
+> Renovate typically operates on the repository's **default branch** and retrieves all
+> data via the [platform](https://docs.renovatebot.com/modules/platform/)'s API (e.g., GitHub,
+> GitLab, or Bitbucket). However, this makes it difficult to test configuration options, since there
+> is no way to make Renovate read the **repository configuration** from a feature branch instead of
+> the main branch.
 
 However, if you want to test configuration options without merging to main, there are two options:
 
-1. Add additional [environment variables](https://docs.renovatebot.com/configuration-options/#packagerules) to your Bot configuration:
+1. Add additional
+   [environment variables](https://docs.renovatebot.com/configuration-options/#packagerules) to your
+   Bot configuration:
 
    ```bash
    export LOG_LEVEL=DEBUG
@@ -151,7 +195,8 @@ However, if you want to test configuration options without merging to main, ther
    npx renovate
    ```
 
-2. Modify the renovate.json configuration file locally and run Renovate in [local mode](https://docs.renovatebot.com/modules/platform/local/):
+2. Modify the renovate.json configuration file locally and run Renovate in
+   [local mode](https://docs.renovatebot.com/modules/platform/local/):
 
    ```bash
    export LOG_LEVEL=DEBUG
@@ -162,41 +207,42 @@ However, if you want to test configuration options without merging to main, ther
 
 ### Reuse Configuration Snippets
 
-It's possible to store [reusable configuration snippets](https://docs.renovatebot.com/config-presets/) like these in a central repository:
+It's possible to store
+[reusable configuration snippets](https://docs.renovatebot.com/config-presets/) like these in a
+central repository:
 
-* [default](default.json)
-* [maven](maven.json)
-* [npm](npm.json)
-* [regex](regex.json)
-* [release-notes](release-notes.json)
-* [standalone](standalone.json)
+- [default](default.json)
+- [maven](maven.json)
+- [npm](npm.json)
+- [regex](regex.json)
+- [release-notes](release-notes.json)
+- [standalone](standalone.json)
 
-For example, if you want to activate the `renovate/default.json` snippet from repository `my-github-org/my-repo`, you can do so using the extends directive:
+For example, if you want to activate the `renovate/default.json` snippet from repository
+`my-github-org/my-repo`, you can do so using the extends directive:
 
 ```json
 {
   "$schema": "https://docs.renovatebot.com/renovate-schema.json",
   "description": "See https://docs.renovatebot.com/configuration-options for available options",
-  "extends": [
-    "github>my-github-org/my-repo//renovate/default"
-  ],
-  "ignorePaths": [
-    ".github/workflows/**"
-  ]
+  "extends": ["github>my-github-org/my-repo//renovate/default"],
+  "ignorePaths": [".github/workflows/**"]
 }
 ```
 
 ### Manage Dependencies in Text Files
 
-Renovate automatically detects dependencies from [common package managers](https://docs.renovatebot.com/modules/manager/)
-such as Maven, Gradle, npm and pip.
+Renovate automatically detects dependencies from
+[common package managers](https://docs.renovatebot.com/modules/manager/) such as Maven, Gradle, npm
+and pip.
 
-If you want to track dependencies that are not in a format that is supported out of the box, or if you need more
-flexibility, you can use so-called [custom regex managers](https://docs.renovatebot.com/modules/manager/regex/).
-They allow you to track and update dependencies in any text file using Renovate.
+If you want to track dependencies that are not in a format that is supported out of the box, or if
+you need more flexibility, you can use so-called
+[custom regex managers](https://docs.renovatebot.com/modules/manager/regex/). They allow you to
+track and update dependencies in any text file using Renovate.
 
-When using [this regex manager](regex.json), you simply need to add a dependency directive comment above the line
-containing the current version number:
+When using [this regex manager](regex.json), you simply need to add a dependency directive comment
+above the line containing the current version number:
 
 In shell scripts and YAML files:
 
@@ -215,5 +261,5 @@ In XML files:
 </palantirJavaFormat>
 ```
 
-For more information, see supported [data sources](https://docs.renovatebot.com/modules/datasource/) and
-[versionings](https://docs.renovatebot.com/modules/versioning/).
+For more information, see supported [data sources](https://docs.renovatebot.com/modules/datasource/)
+and [versionings](https://docs.renovatebot.com/modules/versioning/).

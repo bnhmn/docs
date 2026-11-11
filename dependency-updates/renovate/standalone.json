@@ -2,31 +2,41 @@
   "$schema": "https://docs.renovatebot.com/renovate-schema.json",
   "description": "See https://docs.renovatebot.com/configuration-options for available options",
   "extends": [
-    "config:best-practices",
-    ":semanticCommitTypeAll(chore)",
-    ":disableDependencyDashboard"
+    "config:recommended",
+    ":semanticCommits",
+    ":separateMajorReleases",
+    ":combinePatchMinorReleases"
   ],
-  "ignorePresets": ["docker:pinDigests"],
+  "ignorePresets": [],
+
+  "timezone": "Europe/Berlin",
+  "schedule": ["every weekend"],
+  "prHourlyLimit": 2,
+  "prConcurrentLimit": 5,
+
+  "labels": ["dependencies"],
+  "assigneesFromCodeOwners": true,
+
   "packageRules": [
     {
+      "description": "Auto-merge minor and patch dependency updates",
       "matchUpdateTypes": ["minor", "patch"],
-      "description": "Enable auto-merge for all non-major dependency updates",
       "automerge": true
     },
     {
+      "description": "Only suggest dependency versions older than 7 days for security reasons",
       "matchManagers": ["*"],
-      "description": "Only suggest dependency versions that are older than 7 days for security reasons",
       "minimumReleaseAge": "7 days",
       "internalChecksFilter": "strict"
     },
     {
-      "matchPackageNames": ["com.example.internal.library:*"],
       "description": "Suppress the minimum release age for internal libraries",
+      "matchPackageNames": ["com.example.internal.library:*"],
       "minimumReleaseAge": "0 days"
     },
     {
-      "matchManagers": ["maven"],
       "description": "Show only the artifactId in the title of single-dependency pull requests: 'Update junit-jupiter-api to v6' instead of 'Update dependency org.junit.jupiter:junit-jupiter-api to v6'",
+      "matchManagers": ["maven"],
       "commitMessageTopic": "{{ lookup (split depName ':') 1 }}",
       "prTitleStrict": true
     }
